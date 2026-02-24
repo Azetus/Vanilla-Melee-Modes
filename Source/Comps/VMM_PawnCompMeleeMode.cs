@@ -2,6 +2,7 @@
 using Verse;
 using Verse.Sound;
 using VMM_VanillaMeleeModes.Settings;
+using VMM_VanillaMeleeModes.Utilities;
 
 namespace VMM_VanillaMeleeModes.Comps
 {
@@ -28,8 +29,8 @@ namespace VMM_VanillaMeleeModes.Comps
                 ) {
                 yield return new Command_Action
                 {
-                    defaultLabel = "切换近战模式",
-                    defaultDesc = "切换近战模式",
+                    defaultLabel = Utils.GetMeleeModeLabelFor(curMode),
+                    defaultDesc = "VMM_SwitchGizmoDesc".Translate(),
                     action = () =>
                     {
                         curMode = (VMM_MeleeMode)(((int)curMode + 1) % 4);

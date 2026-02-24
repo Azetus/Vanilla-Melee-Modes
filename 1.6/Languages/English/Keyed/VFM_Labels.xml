@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<VMM_ModTitle>Vanilla Melee Modes</VMM_ModTitle>
+	<VMM_DefaultMode>Default</VMM_DefaultMode>
+	<VMM_AggressiveMode>Aggressive</VMM_AggressiveMode>
+	<VMM_FlurryMode>Flurry</VMM_FlurryMode>
+	<VMM_GuardMode>Guard</VMM_GuardMode>
+	<VMM_SwitchGizmoDesc>Switch Melee Mode</VMM_SwitchGizmoDesc>
+</LanguageData>

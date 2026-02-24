@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<VMM_ModTitle>原版近戰模式</VMM_ModTitle>
+	<VMM_DefaultMode>默認</VMM_DefaultMode>
+	<VMM_AggressiveMode>強攻</VMM_AggressiveMode>
+	<VMM_FlurryMode>迅捷連擊</VMM_FlurryMode>
+	<VMM_GuardMode>防禦姿態</VMM_GuardMode>
+	<VMM_SwitchGizmoDesc>切換近戰模式</VMM_SwitchGizmoDesc>
+</LanguageData>

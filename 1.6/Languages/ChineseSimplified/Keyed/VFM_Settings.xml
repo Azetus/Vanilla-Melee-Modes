@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<VMM_ResetButton_Label>重置设置</VMM_ResetButton_Label>
+
+	<VMM_MeleeHitChance_Label>近战命中率</VMM_MeleeHitChance_Label>
+	<VMM_MeleeDodgeChance_Label>近战闪避率</VMM_MeleeDodgeChance_Label>
+	<VMM_MeleeDamageFactor_Label>近战伤害倍率</VMM_MeleeDamageFactor_Label>
+	<VMM_MeleeCooldownFactor_Label>近战冷却倍率</VMM_MeleeCooldownFactor_Label>
+	<VMM_ArmorPenetration_Label>近战护甲穿透倍率</VMM_ArmorPenetration_Label>
+</LanguageData>

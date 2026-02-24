@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<VMM_ResetButton_Label>Reset To Default</VMM_ResetButton_Label>
+
+	<VMM_MeleeHitChance_Label>Melee Hit Chance</VMM_MeleeHitChance_Label>
+	<VMM_MeleeDodgeChance_Label>Melee Dodge Chance</VMM_MeleeDodgeChance_Label>
+	<VMM_MeleeDamageFactor_Label>Melee Damage Factor</VMM_MeleeDamageFactor_Label>
+	<VMM_MeleeCooldownFactor_Label>Melee Cooldown Factor</VMM_MeleeCooldownFactor_Label>
+	<VMM_ArmorPenetration_Label>Melee Armor Penetration</VMM_ArmorPenetration_Label>
+</LanguageData>

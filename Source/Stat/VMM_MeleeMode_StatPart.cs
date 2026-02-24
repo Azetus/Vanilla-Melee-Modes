@@ -23,7 +23,10 @@ namespace VMM_VanillaMeleeModes.Stat
             if (comp == null) return null;
             var factor = GetFactor(comp.curMode);
 
-            return null;
+            return "VMM_StatPart_Label".Translate(
+                    Utils.GetMeleeModeLabelFor(comp.curMode),
+                    Utils.ToPercentString(factor)
+                );
         }
 
         private static VMM_PawnCompMeleeMode? TryGetComp(StatRequest req) {

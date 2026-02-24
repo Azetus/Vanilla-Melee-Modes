@@ -52,7 +52,16 @@ namespace VMM_VanillaMeleeModes.Utilities
                 _ => 1f
             };
         }
+
+        public static float GetMeleeArmorPenetration(VMM_MeleeMode mode) {
+            return mode switch
+            {
+                VMM_MeleeMode.Aggressive => Settings.aggressive_ArmorPenetration,
+                VMM_MeleeMode.Flurry => Settings.flurry_ArmorPenetration,
+                VMM_MeleeMode.Guard => Settings.guard_ArmorPenetration,
+                _ => 1f
+            };
+        }
+
     }
-
-
 }
