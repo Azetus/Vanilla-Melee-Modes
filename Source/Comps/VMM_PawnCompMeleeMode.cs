@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using UnityEngine;
 using Verse;
 using Verse.Sound;
 using VMM_VanillaMeleeModes.Settings;
@@ -29,6 +30,7 @@ namespace VMM_VanillaMeleeModes.Comps
                 ) {
                 yield return new Command_Action
                 {
+                    icon = GetIconFor(curMode),
                     defaultLabel = Utils.GetMeleeModeLabelFor(curMode),
                     defaultDesc = "VMM_SwitchGizmoDesc".Translate(),
                     action = () =>
@@ -38,6 +40,17 @@ namespace VMM_VanillaMeleeModes.Comps
                     }
                 };
                 
+            }
+        }
+
+        private Texture2D GetIconFor(VMM_MeleeMode mode)
+        {
+            switch (mode) { 
+                case VMM_MeleeMode.Default: return VMM_IconTexture.VMM_Default_Icon;
+                case VMM_MeleeMode.Aggressive: return VMM_IconTexture.VMM_Aggressive_Icon;
+                case VMM_MeleeMode.Flurry: return VMM_IconTexture.VMM_Flurry_Icon;
+                case VMM_MeleeMode.Guard: return VMM_IconTexture.VMM_Guard_Icon;
+                default: return VMM_IconTexture.VMM_Default_Icon;
             }
         }
     }
