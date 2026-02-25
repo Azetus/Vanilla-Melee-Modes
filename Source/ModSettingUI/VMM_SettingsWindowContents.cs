@@ -31,7 +31,10 @@ namespace VMM_VanillaMeleeModes.ModSettingUI
                 ref settings.aggressive_MeleeDodgeChance,
                 ref settings.aggressive_MeleeDamageFactor,
                 ref settings.aggressive_MeleeCooldownFactor,
-                ref settings.aggressive_ArmorPenetration
+                ref settings.aggressive_ArmorPenetration,
+                ref settings.aggressive_MeleeParryChance,
+                ref settings.aggressive_MeleeParryDamageReduction,
+                ref settings.aggressive_MeleeCounterChance
                 );
             // 迅捷
             DrawSettingGroup(
@@ -41,7 +44,10 @@ namespace VMM_VanillaMeleeModes.ModSettingUI
                 ref settings.flurry_MeleeDodgeChance,
                 ref settings.flurry_MeleeDamageFactor,
                 ref settings.flurry_MeleeCooldownFactor,
-                ref settings.flurry_ArmorPenetration
+                ref settings.flurry_ArmorPenetration,
+                ref settings.flurry_MeleeParryChance,
+                ref settings.flurry_MeleeParryDamageReduction,
+                ref settings.flurry_MeleeCounterChance
                 );
             // 防守
             DrawSettingGroup(
@@ -51,7 +57,10 @@ namespace VMM_VanillaMeleeModes.ModSettingUI
                 ref settings.guard_MeleeDodgeChance,
                 ref settings.guard_MeleeDamageFactor,
                 ref settings.guard_MeleeCooldownFactor,
-                ref settings.guard_ArmorPenetration
+                ref settings.guard_ArmorPenetration,
+                ref settings.guard_MeleeParryChance,
+                ref settings.guard_MeleeParryDamageReduction,
+                ref settings.guard_MeleeCounterChance
                 );
 
 

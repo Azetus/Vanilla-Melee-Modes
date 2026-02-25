@@ -39,35 +39,4 @@ namespace VMM_VanillaMeleeModes.Stat
 
     }
 
-    public class VMM_MeleeMode_MeleeHitChance_FactorPart : VMM_MeleeMode_StatPart
-    {
-        protected override float GetFactor(VMM_MeleeMode mode)
-        {
-            return MeleeModeDB.GetMeleeHitChance(mode);
-        }
-    }
-
-    public class VMM_MeleeMode_MeleeDodgeChance_FactorPart : VMM_MeleeMode_StatPart
-    {
-        protected override float GetFactor(VMM_MeleeMode mode)
-        {
-            return MeleeModeDB.GetMeleeDodgeChance(mode);
-        }
-    }
-
-    public class VMM_MeleeMode_MeleeDamageFactor_FactorPart : VMM_MeleeMode_StatPart
-    {
-        protected override float GetFactor(VMM_MeleeMode mode)
-        {
-            return MeleeModeDB.GetMeleeDamageFactor(mode);
-        }
-    }
-
-    public class VMM_MeleeMode_MeleeCooldownFactor_FactorPart : VMM_MeleeMode_StatPart
-    {
-        protected override float GetFactor(VMM_MeleeMode mode)
-        {
-            return MeleeModeDB.GetMeleeCooldownFactor(mode);
-        }
-    }
 }

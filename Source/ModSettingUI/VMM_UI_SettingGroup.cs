@@ -16,7 +16,10 @@ namespace VMM_VanillaMeleeModes.ModSettingUI
             ref float meleeDodgeChance,
             ref float meleeDamageFactor,
             ref float meleeCooldownFactor,
-            ref float armorPenetration
+            ref float armorPenetration,
+            ref float meleeParryChance,
+            ref float meleeParryDamageReduction,
+            ref float meleeCounterChance
             )
         {
 
@@ -43,6 +46,13 @@ namespace VMM_VanillaMeleeModes.ModSettingUI
             DrawSliderWithInput_Float(innerLs, "VMM_MeleeCooldownFactor_Label".Translate(), ref meleeCooldownFactor);
             // 近战穿甲系数
             DrawSliderWithInput_Float(innerLs, "VMM_ArmorPenetration_Label".Translate(), ref armorPenetration);
+            // 近战格挡
+            DrawSliderWithInput_Float(innerLs, "meleeParryChance", ref meleeParryChance, 0.01f,300f);
+            // 近战格挡减伤
+            DrawSliderWithInput_Float(innerLs, "meleeParryDamageReduction", ref meleeParryDamageReduction, 0.01f, 300f);
+            // 近战格挡反击
+            DrawSliderWithInput_Float(innerLs, "meleeCounterChance", ref meleeCounterChance, 0.01f, 300f);
+
 
             float contentHeight = innerLs.CurHeight;
             innerLs.End();
