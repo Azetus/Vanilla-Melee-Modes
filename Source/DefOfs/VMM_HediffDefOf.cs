@@ -1,7 +1,7 @@
 ﻿using RimWorld;
 using Verse;
 
-namespace VMM_VanillaMeleeModes.Hediffs
+namespace VMM_VanillaMeleeModes.DefOfs
 {
     [DefOf]
     public static class VMM_HediffDefOf

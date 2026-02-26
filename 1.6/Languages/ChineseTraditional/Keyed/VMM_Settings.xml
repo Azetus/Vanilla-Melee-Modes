@@ -7,4 +7,8 @@
 	<VMM_MeleeDamageFactor_Label>近戰傷害倍率</VMM_MeleeDamageFactor_Label>
 	<VMM_MeleeCooldownFactor_Label>近戰冷卻倍率</VMM_MeleeCooldownFactor_Label>
 	<VMM_ArmorPenetration_Label>近戰護甲穿透倍率</VMM_ArmorPenetration_Label>
+
+	<VMM_MeleeParryChance_Label>近戰格擋倍率</VMM_MeleeParryChance_Label>
+	<VMM_MeleeParryDamageReduction_Label>格擋減傷倍率</VMM_MeleeParryDamageReduction_Label>
+	<VMM_MeleeCounterChance_Label>格擋反擊倍率</VMM_MeleeCounterChance_Label>
 </LanguageData>

@@ -6,4 +6,7 @@
 	<VMM_FlurryMode>迅捷连击</VMM_FlurryMode>
 	<VMM_GuardMode>防御姿态</VMM_GuardMode>
 	<VMM_SwitchGizmoDesc>切换近战模式</VMM_SwitchGizmoDesc>
+	
+	<VMM_MoteText_Parry>格挡！</VMM_MoteText_Parry>
+	<VMM_MoteText_Counter>反击！</VMM_MoteText_Counter>
 </LanguageData>

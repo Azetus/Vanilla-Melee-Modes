@@ -6,4 +6,7 @@
 	<VMM_FlurryMode>Flurry</VMM_FlurryMode>
 	<VMM_GuardMode>Guard</VMM_GuardMode>
 	<VMM_SwitchGizmoDesc>Switch Melee Mode</VMM_SwitchGizmoDesc>
+
+	<VMM_MoteText_Parry>Parry!</VMM_MoteText_Parry>
+	<VMM_MoteText_Counter>Counter!</VMM_MoteText_Counter>
 </LanguageData>

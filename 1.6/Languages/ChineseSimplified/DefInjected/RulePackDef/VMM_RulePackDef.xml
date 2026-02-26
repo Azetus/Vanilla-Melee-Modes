@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<VMM_Melee_Parried.rulePack.rulesStrings>
+		<li>r_logentry(p=1.0)->[SUBJECT_definite] 格挡了 [INITIATOR_definite] 的攻击。</li>
+	</VMM_Melee_Parried.rulePack.rulesStrings>
+
+	<VMM_Melee_CounterAttack.rulePack.rulesStrings>
+		<li>r_logentry(p=1.0)->[SUBJECT_definite] 在格挡后尝试对 [INITIATOR_definite] 发动反击！</li>
+	</VMM_Melee_CounterAttack.rulePack.rulesStrings>
+</LanguageData>

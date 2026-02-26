@@ -1,6 +1,6 @@
 ﻿using RimWorld;
 
-namespace VMM_VanillaMeleeModes.Stat
+namespace VMM_VanillaMeleeModes.DefOfs
 {
     [DefOf]
     public static class VMM_StatDefOf

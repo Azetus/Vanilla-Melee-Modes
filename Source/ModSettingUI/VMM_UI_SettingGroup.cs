@@ -47,11 +47,11 @@ namespace VMM_VanillaMeleeModes.ModSettingUI
             // 近战穿甲系数
             DrawSliderWithInput_Float(innerLs, "VMM_ArmorPenetration_Label".Translate(), ref armorPenetration);
             // 近战格挡
-            DrawSliderWithInput_Float(innerLs, "meleeParryChance", ref meleeParryChance, 0.01f,300f);
+            DrawSliderWithInput_Float(innerLs, "VMM_MeleeParryChance_Label".Translate(), ref meleeParryChance, 0.01f,300f);
             // 近战格挡减伤
-            DrawSliderWithInput_Float(innerLs, "meleeParryDamageReduction", ref meleeParryDamageReduction, 0.01f, 300f);
+            DrawSliderWithInput_Float(innerLs, "VMM_MeleeParryDamageReduction_Label".Translate(), ref meleeParryDamageReduction, 0.01f, 300f);
             // 近战格挡反击
-            DrawSliderWithInput_Float(innerLs, "meleeCounterChance", ref meleeCounterChance, 0.01f, 300f);
+            DrawSliderWithInput_Float(innerLs, "VMM_MeleeCounterChance_Label".Translate(), ref meleeCounterChance, 0.01f, 300f);
 
 
             float contentHeight = innerLs.CurHeight;

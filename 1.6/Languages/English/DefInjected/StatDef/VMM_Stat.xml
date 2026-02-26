@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<VMM_MeleeParryChance.label>Melee Parry Chance</VMM_MeleeParryChance.label>
+	<VMM_MeleeParryChance.description>Chance to parry incoming melee attacks.</VMM_MeleeParryChance.description>
+
+	<VMM_MeleeParryDamageReduction.label>Melee Parry Damage Reduction</VMM_MeleeParryDamageReduction.label>
+	<VMM_MeleeParryDamageReduction.description>Fraction of damage reduced when a parry is successful.</VMM_MeleeParryDamageReduction.description>
+
+	<VMM_MeleeCounterChance.label>Melee Counter Chance</VMM_MeleeCounterChance.label>
+	<VMM_MeleeCounterChance.description>Chance to immediately counter-attack after a successful parry.</VMM_MeleeCounterChance.description>
+</LanguageData>

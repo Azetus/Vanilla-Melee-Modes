@@ -3,8 +3,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
-using VMM_VanillaMeleeModes.Hediffs;
-using VMM_VanillaMeleeModes.Stat;
+using VMM_VanillaMeleeModes.DefOfs;
 
 namespace VMM_VanillaMeleeModes.Patches
 {
@@ -36,7 +35,7 @@ namespace VMM_VanillaMeleeModes.Patches
                 MoteMaker.ThrowText(
                     defender.DrawPos,
                     defender.Map,
-                    "Parry!",
+                    "VMM_MoteText_Parry".Translate(),
                     3f);
                 FleckMaker.ThrowMicroSparks(
                     defender.DrawPos,
@@ -47,6 +46,11 @@ namespace VMM_VanillaMeleeModes.Patches
                     );
 
                 dinfo.SetAmount(newAmount);
+
+                Find.BattleLog.Add(new BattleLogEntry_Event(
+                    defender,
+                    VMM_RulePackDefOf.VMM_Melee_Parried,
+                    attacker));
 
                 if (Rand.Chance(counterChance))
                 {
@@ -79,13 +83,20 @@ namespace VMM_VanillaMeleeModes.Patches
                     defender.stances.CancelBusyStanceSoft();
                 }
 
+                Find.BattleLog.Add(new BattleLogEntry_Event(
+                    defender,
+                    VMM_RulePackDefOf.VMM_Melee_CounterAttack,
+                    attacker));
+
+
                 bool attackSuccess = verb.TryStartCastOn(attacker, canHitNonTargetPawns: false, nonInterruptingSelfCast: true);
+
                 if (attackSuccess)
                 {
                     defender.health.AddHediff(VMM_HediffDefOf.VMM_CounterAttackCooldown);
                     MoteMaker.ThrowText(defender.DrawPos,
                         defender.Map,
-                        "Counter!",
+                        "VMM_MoteText_Counter".Translate(),
                         Color.red,
                         3f);
                 }

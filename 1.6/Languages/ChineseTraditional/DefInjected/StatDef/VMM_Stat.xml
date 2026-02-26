@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<VMM_MeleeParryChance.label>近戰格擋概率</VMM_MeleeParryChance.label>
+	<VMM_MeleeParryChance.description>格擋近戰攻擊的概率</VMM_MeleeParryChance.description>
+
+	<VMM_MeleeParryDamageReduction.label>近戰格擋傷害減免</VMM_MeleeParryDamageReduction.label>
+	<VMM_MeleeParryDamageReduction.description>格擋成功後的傷害減免比例</VMM_MeleeParryDamageReduction.description>
+
+	<VMM_MeleeCounterChance.label>近戰格擋反擊概率</VMM_MeleeCounterChance.label>
+	<VMM_MeleeCounterChance.description>格擋成功後立刻發動反擊的概率</VMM_MeleeCounterChance.description>
+</LanguageData>
