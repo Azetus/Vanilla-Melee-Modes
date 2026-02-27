@@ -1,9 +1,8 @@
 ﻿using RimWorld;
-using Verse;
 
 namespace VMM_VanillaMeleeModes.DefOfs
 {
-    [StaticConstructorOnStartup]
+    [DefOf]
     public static class VMM_StatDefOf
     {
 
@@ -13,11 +12,7 @@ namespace VMM_VanillaMeleeModes.DefOfs
 
         static VMM_StatDefOf()
         {
-            if(VanillaMeleeModes.isCEActive)
-                return;
-            VMM_MeleeParryChance = DefDatabase<StatDef>.GetNamed("VMM_MeleeParryChance", true);
-            VMM_MeleeParryDamageReduction = DefDatabase<StatDef>.GetNamed("VMM_MeleeParryDamageReduction", true);
-            VMM_MeleeCounterChance = DefDatabase<StatDef>.GetNamed("VMM_MeleeCounterChance", true);
+            DefOfHelper.EnsureInitializedInCtor(typeof(VMM_StatDefOf));
         }
     }
 }
