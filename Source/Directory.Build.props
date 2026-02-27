@@ -1,0 +1,15 @@
+﻿<Project>
+
+    <PropertyGroup>
+        <RimworldVersion>1.6</RimworldVersion>
+        
+        <TargetFramework>net472</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>10.0</LangVersion>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Krafs.Rimworld.Ref" Version="1.6.4739-beta" />
+        <PackageReference Include="Lib.Harmony.Ref" Version="2.4.2" />
+    </ItemGroup>
+</Project>

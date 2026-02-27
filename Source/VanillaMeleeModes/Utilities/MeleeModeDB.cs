@@ -2,6 +2,7 @@
 
 namespace VMM_VanillaMeleeModes.Utilities
 {
+    // ------------ Vanilla ------------
     public static class MeleeModeDB
     {
         public static VanillaMeleeModesModSetting Settings => VanillaMeleeModes.settings;

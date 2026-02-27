@@ -11,4 +11,7 @@
 	<VMM_MeleeParryChance_Label>近战格挡倍率</VMM_MeleeParryChance_Label>
 	<VMM_MeleeParryDamageReduction_Label>格挡减伤倍率</VMM_MeleeParryDamageReduction_Label>
 	<VMM_MeleeCounterChance_Label>格挡反击倍率</VMM_MeleeCounterChance_Label>
+	
+	<VMM_CE_IsActive_Label>检测到Combat Extended已加载，切换为CE兼容模式</VMM_CE_IsActive_Label>
+	<VMM_CE_MeleeCritChance_Label>近战暴击率</VMM_CE_MeleeCritChance_Label>
 </LanguageData>

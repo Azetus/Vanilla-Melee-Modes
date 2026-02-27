@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net472</TargetFramework>
+        <RootNamespace>VMM_VanillaMeleeModes.Patch_CombatExtended</RootNamespace>
+        <AssemblyName>zz.VMM.Patch_CombatExtended</AssemblyName>
+        <!--        <ImplicitUsings>enable</ImplicitUsings>-->
+        <!--        <Nullable>enable</Nullable>-->
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <OutputPath>..\..\..\ModPatches\CombatExtended\$(RimworldVersion)\Assemblies\</OutputPath>
+        <DebugType>none</DebugType>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\VanillaMeleeModes\VanillaMeleeModes.csproj" >
+            <Private>False</Private>
+            <CopyLocal>False</CopyLocal>
+            <ExcludeAssets>all</ExcludeAssets>
+        </ProjectReference>
+        
+        <PackageReference Include="Krafs.Publicizer" Version="2.3.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        
+        <Reference Include="CombatExtended">
+            <HintPath>ref\CombatExtended.dll</HintPath>
+            <Private>False</Private>
+            <CopyLocal>False</CopyLocal>
+            <ExcludeAssets>runtime</ExcludeAssets>
+        </Reference>
+        <Publicize Include="CombatExtended" />
+    </ItemGroup>
+</Project>

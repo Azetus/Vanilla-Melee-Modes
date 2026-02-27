@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<HediffDef>
+		<defName>VMM_CounterAttackCooldown</defName>
+		<label>counter-attack cooldown</label>
+		<description>This is a hidden marker used during the parry/counter-attack cooldown. It prevents infinite recursion in the counter-attack logic. Please ignore it.</description>
+		<hediffClass>VMM_VanillaMeleeModes.Hediffs.VMM_Hediff_CounterAttackCooldown</hediffClass>
+		<defaultLabelColor>(0.8, 0.8, 0.8)</defaultLabelColor>
+		<isBad>false</isBad>
+		<tendable>false</tendable>
+		<comps>
+			<li Class="HediffCompProperties_DisappearsOnDeath" />
+			<li Class="HediffCompProperties_Disappears">
+				<disappearsAfterTicks>60</disappearsAfterTicks>
+				<showRemainingTime>false</showRemainingTime>
+			</li>
+		</comps>
+	</HediffDef>
+</Defs>

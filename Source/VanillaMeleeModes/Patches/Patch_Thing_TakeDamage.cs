@@ -27,8 +27,10 @@ namespace VMM_VanillaMeleeModes.Patches
             float parryChance = defender.GetStatValue(VMM_StatDefOf.VMM_MeleeParryChance);
             float parryDamageReduction = defender.GetStatValue(VMM_StatDefOf.VMM_MeleeParryDamageReduction);
             float counterChance = defender.GetStatValue(VMM_StatDefOf.VMM_MeleeCounterChance);
-
-            if (Rand.Chance(parryChance))
+            
+            float weaponFactor = GetWeaponParryFactor(defender);
+            // 是否触发格挡
+            if (Rand.Chance(parryChance * weaponFactor))
             {
                 float newAmount = dinfo.Amount * (MathF.Max(0f, 1f - parryDamageReduction));
 
@@ -51,8 +53,8 @@ namespace VMM_VanillaMeleeModes.Patches
                     defender,
                     VMM_RulePackDefOf.VMM_Melee_Parried,
                     attacker));
-
-                if (Rand.Chance(counterChance))
+                // 是否触发反击
+                if (Rand.Chance(counterChance * weaponFactor))
                 {
                     TryCounter(defender, attacker);
                 }
@@ -104,6 +106,21 @@ namespace VMM_VanillaMeleeModes.Patches
 
         }
 
+        // 是否持有武器
+        private static float GetWeaponParryFactor(Pawn defender)
+        {
+            var weapon = defender?.equipment?.Primary;
+            if (weapon == null) return 0f;
+
+            if (weapon.def.IsMeleeWeapon)
+                return 1f;
+
+            if (weapon.def.IsRangedWeapon)
+                return 0.5f;
+
+            return 1f;
+        }
+
         private static bool CanParry(Pawn defender)
         {
             if(defender == null)
@@ -111,7 +128,7 @@ namespace VMM_VanillaMeleeModes.Patches
             // 排除死亡或倒下
             if (defender.Dead || defender.Downed)
                 return false;
-            // 只有Humanlike和Mechnoid能格挡
+            // 只有Humanlike和Mechanoid能格挡
             if (defender.RaceProps == null || !(defender.RaceProps.Humanlike || defender.RaceProps.IsMechanoid))
                 return false;
             // 必须有操作能力
@@ -140,7 +157,7 @@ namespace VMM_VanillaMeleeModes.Patches
             // 对面倒下或死亡就不用反击了
             if (attacker.Dead || attacker.Downed)
                 return false;
-            // 只有Humanlike和Mechnoid能格挡
+            // 只有Humanlike和Mechanoid能格挡
             if (defender.RaceProps == null || !(defender.RaceProps.Humanlike || defender.RaceProps.IsMechanoid))
                 return false;
             // 必须有操作能力

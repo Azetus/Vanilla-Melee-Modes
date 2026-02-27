@@ -6,8 +6,8 @@ namespace VMM_VanillaMeleeModes.ModSettingUI
 {
     internal static class VMM_UI_SettingGroup
     {
-        const float Padding = 10f;
-        const float BottomSpacing = 15f;
+        private const float Padding = 10f;
+        private const float BottomSpacing = 15f;
 
         public static void DrawSettingGroup(
             Listing_Standard ls,

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VanillaMeleeModes", "VanillaMeleeModes.csproj", "{9740720B-186E-43B4-A4D5-2E5C60317004}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VanillaMeleeModes", "VanillaMeleeModes\VanillaMeleeModes.csproj", "{9740720B-186E-43B4-A4D5-2E5C60317004}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patch_CombatExtended", "ModPatches\Patch_CombatExtended\Patch_CombatExtended.csproj", "{B8B78A57-1D52-446D-8F42-6A486651C4B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{9740720B-186E-43B4-A4D5-2E5C60317004}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9740720B-186E-43B4-A4D5-2E5C60317004}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9740720B-186E-43B4-A4D5-2E5C60317004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8B78A57-1D52-446D-8F42-6A486651C4B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8B78A57-1D52-446D-8F42-6A486651C4B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8B78A57-1D52-446D-8F42-6A486651C4B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8B78A57-1D52-446D-8F42-6A486651C4B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
