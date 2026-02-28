@@ -19,8 +19,6 @@
 		<li>brrainz.harmony</li>
 		<li>CETeam.CombatExtended</li>
 	</loadAfter>
-	<description>
-		Vanilla Melee Modes - Selectable melee modes for vanilla melee combat
-	</description>
+	<description>Vanilla Melee Modes - Selectable melee modes with parry and counterattack for vanilla melee combat</description>
 	<modIconPath IgnoreIfNoMatchingField="True">VMM_Mod_Icon</modIconPath>
 </ModMetaData>
