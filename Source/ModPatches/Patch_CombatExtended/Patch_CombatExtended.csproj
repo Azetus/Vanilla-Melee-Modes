@@ -19,17 +19,11 @@
             <ExcludeAssets>all</ExcludeAssets>
         </ProjectReference>
         
-        <PackageReference Include="Krafs.Publicizer" Version="2.3.0">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-        
         <Reference Include="CombatExtended">
             <HintPath>ref\CombatExtended.dll</HintPath>
             <Private>False</Private>
             <CopyLocal>False</CopyLocal>
             <ExcludeAssets>runtime</ExcludeAssets>
         </Reference>
-        <Publicize Include="CombatExtended" />
     </ItemGroup>
 </Project>
