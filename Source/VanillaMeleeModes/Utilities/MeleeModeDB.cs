@@ -99,7 +99,7 @@ namespace VMM_VanillaMeleeModes.Utilities
             {
                 VMM_MeleeMode.Aggressive => Settings.aggressive_MeleeCounterChance,
                 VMM_MeleeMode.Flurry => Settings.flurry_MeleeCounterChance,
-                VMM_MeleeMode.Guard => Settings.flurry_MeleeCounterChance,
+                VMM_MeleeMode.Guard => Settings.guard_MeleeCounterChance,
                 _ => 1f
             };
         }

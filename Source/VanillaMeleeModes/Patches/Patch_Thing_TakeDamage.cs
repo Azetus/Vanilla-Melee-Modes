@@ -18,7 +18,7 @@ namespace VMM_VanillaMeleeModes.Patches
             if (dinfo.Instigator is not Pawn attacker)
                 return;
 
-            if (dinfo.Def.isRanged)
+            if (!IsValidMeleeAttack(dinfo, defender))
                 return;
             
             if(!CanParry(defender))
@@ -119,6 +119,36 @@ namespace VMM_VanillaMeleeModes.Patches
                 return 0.5f;
 
             return 1f;
+        }
+        
+        // 可格挡伤害来源
+        private static bool IsValidMeleeAttack(DamageInfo dinfo, Pawn defender)
+        {
+            // 必须有攻击者
+            if (dinfo.Instigator is not Pawn attacker)
+                return false;
+
+            // 不能是自己
+            if (attacker == defender)
+                return false;
+
+            // 排除远程
+            if (dinfo.Def.isRanged)
+                return false;
+
+            // 排除爆炸
+            if (dinfo.Def.isExplosive)
+                return false;
+
+            // 排除处决
+            if (dinfo.Def.execution)
+                return false;
+            
+            // 排除非武器和肢体
+            if (dinfo.Weapon == null && dinfo.WeaponBodyPartGroup == null)
+                return false;
+
+            return true;
         }
 
         private static bool CanParry(Pawn defender)
