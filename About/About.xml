@@ -22,4 +22,5 @@
 	<description>
 		Vanilla Melee Modes - Selectable melee modes for vanilla melee combat
 	</description>
+	<modIconPath IgnoreIfNoMatchingField="True">VMM_Mod_Icon</modIconPath>
 </ModMetaData>
