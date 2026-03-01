@@ -14,4 +14,8 @@
 
 	<VMM_CE_IsActive_Label>Combat Extended detected – CE compatibility mode enabled</VMM_CE_IsActive_Label>
 	<VMM_CE_MeleeCritChance_Label>Melee Crit Chance Factor</VMM_CE_MeleeCritChance_Label>
+
+	<VMM_EnableVanillaParry_Label>Enable Parrying Mechanism</VMM_EnableVanillaParry_Label>
+	<VMM_EnableVanillaCounterattack_Label>Enable Counterattack Mechanism</VMM_EnableVanillaCounterattack_Label>
+	<VMM_EnableVanillaParryAndCounterattackForNpc_Label>Enable Parrying and Counterattacking for NPCs</VMM_EnableVanillaParryAndCounterattackForNpc_Label>
 </LanguageData>

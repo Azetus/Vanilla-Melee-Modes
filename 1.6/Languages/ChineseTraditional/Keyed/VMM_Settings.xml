@@ -14,4 +14,8 @@
 
 	<VMM_CE_IsActive_Label>檢測到Combat Extended已加載，切換為CE兼容模式</VMM_CE_IsActive_Label>
 	<VMM_CE_MeleeCritChance_Label>近戰暴擊率</VMM_CE_MeleeCritChance_Label>
+
+	<VMM_EnableVanillaParry_Label>啟用格擋機制</VMM_EnableVanillaParry_Label>
+	<VMM_EnableVanillaCounterattack_Label>啟用反擊機制</VMM_EnableVanillaCounterattack_Label>
+	<VMM_EnableVanillaParryAndCounterattackForNpc_Label>為NPC啟用格擋與反擊</VMM_EnableVanillaParryAndCounterattackForNpc_Label>
 </LanguageData>

@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using Verse;
+using VMM_VanillaMeleeModes.DefOfs;
 
 namespace VMM_VanillaMeleeModes.Stat
 {
@@ -8,6 +9,11 @@ namespace VMM_VanillaMeleeModes.Stat
     {
         public override bool ShouldShowFor(StatRequest req)
         {
+            if (!base.ShouldShowFor(req))
+            {
+                return false;
+            }
+            
             if (!req.HasThing || req.Thing is not Pawn pawn)
                 return false;
 
@@ -16,6 +22,14 @@ namespace VMM_VanillaMeleeModes.Stat
             if (VanillaMeleeModes.isCEActive)
                 return false;
 
+            //检测下Mod Setting
+            //关闭格挡机制就隐藏
+            if(!VanillaMeleeModes.settings.enable_VMM_parry)
+                return false;
+            //关闭反击机制就隐藏
+            if(!VanillaMeleeModes.settings.enable_VMM_counterattack && this.stat == VMM_StatDefOf.VMM_MeleeCounterChance)
+                return false;
+            
             return pawn.RaceProps.Humanlike || pawn.RaceProps.IsMechanoid; // 只显示人类和机械族
         }
 

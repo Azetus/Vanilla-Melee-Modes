@@ -41,6 +41,11 @@ namespace VMM_VanillaMeleeModes.Settings
         public float guard_MeleeParryDamageReduction = 1.5f;
         public float guard_MeleeCounterChance = 0.7f;
 
+        // ------ 基础设置 ------
+        public bool enable_VMM_parry = true;
+        public bool enable_VMM_counterattack = true;
+        public bool enable_VMM_parryAndCounterattackForNpc = true;
+        
         #endregion
 
         #region CE
@@ -118,6 +123,11 @@ namespace VMM_VanillaMeleeModes.Settings
             Scribe_Values.Look(ref guard_MeleeParryDamageReduction, "guard_MeleeParryDamageReduction", 1.5f);
             Scribe_Values.Look(ref guard_MeleeCounterChance, "guard_MeleeCounterChance", 0.7f);
 
+            // ------ 基础设置 ------
+            Scribe_Values.Look(ref enable_VMM_parry, "enable_VMM_parry", true);
+            Scribe_Values.Look(ref enable_VMM_counterattack, "enable_VMM_counterattack", true);
+            Scribe_Values.Look(ref enable_VMM_parryAndCounterattackForNpc, "enable_VMM_parryAndCounterattackForNpc", true);
+            
             #endregion
 
             #region CE ExposeData
@@ -191,6 +201,11 @@ namespace VMM_VanillaMeleeModes.Settings
             guard_MeleeParryChance = 1.6f;
             guard_MeleeParryDamageReduction = 1.5f;
             guard_MeleeCounterChance = 0.7f;
+            
+        // ------ 基础设置 ------
+            enable_VMM_parry = true;
+            enable_VMM_counterattack = true;
+            enable_VMM_parryAndCounterattackForNpc = true;
         }
 
         public void ResetSetting_CE()

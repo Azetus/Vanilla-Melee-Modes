@@ -12,7 +12,13 @@ namespace VMM_VanillaMeleeModes.Patches
     {
         static void Prefix(Thing __instance, ref DamageInfo dinfo)
         {
+            if (!VanillaMeleeModes.settings.enable_VMM_parry)
+                return;
+            
             if (__instance is not Pawn defender)
+                return;
+            
+            if(!FactionCheck(defender))
                 return;
 
             if (dinfo.Instigator is not Pawn attacker)
@@ -54,7 +60,7 @@ namespace VMM_VanillaMeleeModes.Patches
                     VMM_RulePackDefOf.VMM_Melee_Parried,
                     attacker));
                 // 是否触发反击
-                if (Rand.Chance(counterChance * weaponFactor))
+                if (VanillaMeleeModes.settings.enable_VMM_counterattack && Rand.Chance(counterChance * weaponFactor))
                 {
                     TryCounter(defender, attacker);
                 }
@@ -223,6 +229,17 @@ namespace VMM_VanillaMeleeModes.Patches
                 return pawn.GetPosture() != PawnPosture.Standing;
             }
             return true;
+        }
+
+        private static bool FactionCheck(Pawn defender)
+        {
+            if (defender.IsColonistPlayerControlled || defender.IsColonyMechPlayerControlled ||
+                defender.IsColonySubhumanPlayerControlled)
+            {
+                return true;
+            }
+
+            return VanillaMeleeModes.settings.enable_VMM_parryAndCounterattackForNpc;
         }
     }
 }

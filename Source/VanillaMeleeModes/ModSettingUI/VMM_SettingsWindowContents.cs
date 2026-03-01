@@ -27,6 +27,24 @@ namespace VMM_VanillaMeleeModes.ModSettingUI
 
             if (!VanillaMeleeModes.isCEActive)
             {
+                // Vanilla Parry & Counterattack
+                ls.CheckboxLabeled(
+                    "VMM_EnableVanillaParry_Label".Translate(),
+                    ref settings.enable_VMM_parry
+                );
+                if (settings.enable_VMM_parry)
+                {
+                    ls.CheckboxLabeled(
+                        "VMM_EnableVanillaCounterattack_Label".Translate(),
+                        ref settings.enable_VMM_counterattack
+                    );
+                    ls.CheckboxLabeled(
+                        "VMM_EnableVanillaParryAndCounterattackForNpc_Label".Translate(),
+                        ref settings.enable_VMM_parryAndCounterattackForNpc
+                    );
+                }
+            
+                
                 // 强攻
                 DrawSettingGroup(
                     ls,
