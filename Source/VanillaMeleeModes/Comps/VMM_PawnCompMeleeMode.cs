@@ -25,7 +25,7 @@ namespace VMM_VanillaMeleeModes.Comps
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
             if (parent is Pawn pawn &&
-                (pawn.IsColonistPlayerControlled || pawn.IsColonyMechPlayerControlled) &&
+                (pawn.IsColonistPlayerControlled || pawn.IsColonyMechPlayerControlled || pawn.IsColonySubhumanPlayerControlled) &&
                 pawn.Drafted
                 ) {
                 yield return new Command_Action
