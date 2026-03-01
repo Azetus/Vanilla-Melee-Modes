@@ -184,4 +184,20 @@
 			<li Class="VMM_VanillaMeleeModes.Stat.VMM_MeleeMode_MeleeCounterChance_FactorPart"/>
 		</parts>
 	</StatDef>
+
+	<StatDef>
+		<defName>VMM_MeleeParryAngle</defName>
+		<label>Effective Melee Parry Angle (degrees)</label>
+		<description>This stat defines the maximum angle within which a pawn can attempt to parry incoming melee attacks. For example, with a value of 90, the pawn will only attempt to parry melee attacks within a 90° arc in front of them. At a minimum value of 0, the pawn will be unable to parry any attacks. At the maximum value of 360, the pawn can attempt to parry melee attacks from any direction.</description>
+		<category>PawnCombat</category>
+		<workerClass>VMM_VanillaMeleeModes.Stat.VMM_StatWorker</workerClass>
+		<toStringStyle>FloatOne</toStringStyle>
+		<toStringStyleUnfinalized>FloatOne</toStringStyleUnfinalized>
+		<defaultBaseValue>120</defaultBaseValue>
+		<minValue>0</minValue>
+		<maxValue>360</maxValue>
+		<parts>
+			<li Class="VMM_VanillaMeleeModes.Stat.VMM_ParryAngle_StatPart"/>
+		</parts>
+	</StatDef>
 </Defs>

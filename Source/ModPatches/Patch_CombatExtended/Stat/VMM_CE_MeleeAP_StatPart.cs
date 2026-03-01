@@ -8,7 +8,7 @@ namespace VMM_VanillaMeleeModes.Patch_CombatExtended.Stat
 {
     public class VMM_CE_MeleeAP_StatPart : VMM_CE_MeleeMode_StatPart
     {
-        protected override float GetFactor(VMM_MeleeMode mode)
+        protected override float? GetFactor(VMM_MeleeMode mode)
         {
             return MeleeModeDB_CE.GetMeleeArmorPenetration_CE(mode);
         }
@@ -17,7 +17,11 @@ namespace VMM_VanillaMeleeModes.Patch_CombatExtended.Stat
         {
             VMM_PawnCompMeleeMode? comp = TryGetComp(req);
             if (comp == null) return;
-            val *= GetFactor(comp.curMode);
+            float? factor = GetFactor(comp.curMode);
+            if (factor.HasValue)
+            {
+                ApplyValue(ref val, factor.Value);
+            }
         }
 
         public override string? ExplanationPart(StatRequest req)
@@ -26,13 +30,16 @@ namespace VMM_VanillaMeleeModes.Patch_CombatExtended.Stat
             if (comp == null) return null;
             var factor = GetFactor(comp.curMode);
 
-            return "VMM_StatPart_Label".Translate(
-                Utils.GetMeleeModeLabelFor(comp.curMode),
-                Utils.ToPercentString(factor)
-            );
+            if (factor.HasValue){
+                return "VMM_StatPart_Label".Translate(
+                    Utils.GetMeleeModeLabelFor(comp.curMode),
+                    Utils.ToPercentString(factor.Value)
+                );
+            }
+            return null;
         }
 
-        private static VMM_PawnCompMeleeMode? TryGetComp(StatRequest req)
+        protected override VMM_PawnCompMeleeMode? TryGetComp(StatRequest req)
         {
             if (!req.HasThing)
                 return null;

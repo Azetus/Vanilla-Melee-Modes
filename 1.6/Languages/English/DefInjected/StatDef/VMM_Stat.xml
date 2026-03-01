@@ -8,4 +8,7 @@
 
 	<VMM_MeleeCounterChance.label>Melee Counter Chance</VMM_MeleeCounterChance.label>
 	<VMM_MeleeCounterChance.description>Chance to immediately counter-attack after a successful parry.</VMM_MeleeCounterChance.description>
+
+	<VMM_MeleeParryAngle.label>Effective Melee Parry Angle (degrees)</VMM_MeleeParryAngle.label>
+	<VMM_MeleeParryAngle.description>This stat defines the maximum angle within which a pawn can attempt to parry incoming melee attacks. For example, with a value of 90, the pawn will only attempt to parry melee attacks within a 90° arc in front of them. At a minimum value of 0, the pawn will be unable to parry any attacks. At the maximum value of 360, the pawn can attempt to parry melee attacks from any direction.</VMM_MeleeParryAngle.description>
 </LanguageData>

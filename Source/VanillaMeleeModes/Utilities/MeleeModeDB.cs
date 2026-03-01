@@ -69,6 +69,17 @@ namespace VMM_VanillaMeleeModes.Utilities
             };
         }
 
+        // 近战格挡角度
+        public static float? GetMeleeParryAngleValue(VMM_MeleeMode mode)
+        {
+            return mode switch
+            {
+                VMM_MeleeMode.Aggressive => Settings.aggressive_MeleeParryAngle,
+                VMM_MeleeMode.Flurry => Settings.flurry_MeleeParryAngle,
+                VMM_MeleeMode.Guard => Settings.guard_MeleeParryAngle,
+                _ => null
+            };
+        }
         // 近战格挡率
         public static float GetMeleeParryChanceFactor(VMM_MeleeMode mode) {
             return mode switch

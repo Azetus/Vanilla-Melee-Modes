@@ -14,6 +14,7 @@ namespace VMM_VanillaMeleeModes.Settings
         public float aggressive_MeleeCooldownFactor = 1.35f;
         public float aggressive_ArmorPenetration = 1.10f;
 
+        public float aggressive_MeleeParryAngle = 80f;
         public float aggressive_MeleeParryChance = 0.9f;
         public float aggressive_MeleeParryDamageReduction = 0.8f;
         public float aggressive_MeleeCounterChance = 1.5f;
@@ -26,6 +27,7 @@ namespace VMM_VanillaMeleeModes.Settings
         public float flurry_MeleeCooldownFactor = 0.75f;
         public float flurry_ArmorPenetration = 0.9f;
 
+        public float flurry_MeleeParryAngle = 100f;
         public float flurry_MeleeParryChance = 0.8f;
         public float flurry_MeleeParryDamageReduction = 0.7f;
         public float flurry_MeleeCounterChance = 0.6f;
@@ -37,6 +39,7 @@ namespace VMM_VanillaMeleeModes.Settings
         public float guard_MeleeCooldownFactor = 1.05f;
         public float guard_ArmorPenetration = 0.85f;
 
+        public float guard_MeleeParryAngle = 180f;
         public float guard_MeleeParryChance = 1.6f;
         public float guard_MeleeParryDamageReduction = 1.5f;
         public float guard_MeleeCounterChance = 0.7f;
@@ -95,6 +98,7 @@ namespace VMM_VanillaMeleeModes.Settings
             Scribe_Values.Look(ref aggressive_MeleeCooldownFactor, "aggressive_MeleeCooldownFactor", 1.35f);
             Scribe_Values.Look(ref aggressive_ArmorPenetration, "aggressive_ArmorPenetration", 1.10f);
 
+            Scribe_Values.Look(ref aggressive_MeleeParryAngle, "aggressive_MeleeParryAngle", 80f);
             Scribe_Values.Look(ref aggressive_MeleeParryChance, "aggressive_MeleeParryChance", 0.9f);
             Scribe_Values.Look(ref aggressive_MeleeParryDamageReduction, "aggressive_MeleeParryDamageReduction", 0.8f);
             Scribe_Values.Look(ref aggressive_MeleeCounterChance, "aggressive_MeleeCounterChance", 1.5f);
@@ -107,6 +111,7 @@ namespace VMM_VanillaMeleeModes.Settings
             Scribe_Values.Look(ref flurry_MeleeCooldownFactor, "flurry_MeleeCooldownFactor", 0.75f);
             Scribe_Values.Look(ref flurry_ArmorPenetration, "flurry_ArmorPenetration", 0.9f);
 
+            Scribe_Values.Look(ref flurry_MeleeParryAngle, "flurry_MeleeParryAngle", 100f);
             Scribe_Values.Look(ref flurry_MeleeParryChance, "flurry_MeleeParryChance", 0.8f);
             Scribe_Values.Look(ref flurry_MeleeParryDamageReduction, "flurry_MeleeParryDamageReduction", 0.7f);
             Scribe_Values.Look(ref flurry_MeleeCounterChance, "flurry_MeleeCounterChance", 0.6f);
@@ -119,6 +124,7 @@ namespace VMM_VanillaMeleeModes.Settings
             Scribe_Values.Look(ref guard_MeleeCooldownFactor, "guard_MeleeCooldownFactor", 1.05f);
             Scribe_Values.Look(ref guard_ArmorPenetration, "guard_ArmorPenetration", 0.85f);
 
+            Scribe_Values.Look(ref guard_MeleeParryAngle, "guard_MeleeParryAngle", 180f);
             Scribe_Values.Look(ref guard_MeleeParryChance, "guard_MeleeParryChance", 1.6f);
             Scribe_Values.Look(ref guard_MeleeParryDamageReduction, "guard_MeleeParryDamageReduction", 1.5f);
             Scribe_Values.Look(ref guard_MeleeCounterChance, "guard_MeleeCounterChance", 0.7f);
@@ -175,6 +181,7 @@ namespace VMM_VanillaMeleeModes.Settings
             aggressive_MeleeCooldownFactor = 1.35f;
             aggressive_ArmorPenetration = 1.10f;
 
+            aggressive_MeleeParryAngle = 80f;
             aggressive_MeleeParryChance = 0.9f;
             aggressive_MeleeParryDamageReduction = 0.8f;
             aggressive_MeleeCounterChance = 1.5f;
@@ -187,6 +194,7 @@ namespace VMM_VanillaMeleeModes.Settings
             flurry_MeleeCooldownFactor = 0.75f;
             flurry_ArmorPenetration = 0.9f;
 
+            flurry_MeleeParryAngle = 100f;
             flurry_MeleeParryChance = 0.8f;
             flurry_MeleeParryDamageReduction = 0.7f;
             flurry_MeleeCounterChance = 0.6f;
@@ -198,6 +206,7 @@ namespace VMM_VanillaMeleeModes.Settings
             guard_MeleeCooldownFactor = 1.05f;
             guard_ArmorPenetration = 0.85f;
 
+            guard_MeleeParryAngle = 180f;
             guard_MeleeParryChance = 1.6f;
             guard_MeleeParryDamageReduction = 1.5f;
             guard_MeleeCounterChance = 0.7f;

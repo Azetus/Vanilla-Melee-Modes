@@ -6,6 +6,7 @@ namespace VMM_VanillaMeleeModes.DefOfs
     public static class VMM_StatDefOf
     {
 
+        public static StatDef VMM_MeleeParryAngle;
         public static StatDef VMM_MeleeParryChance;
         public static StatDef VMM_MeleeParryDamageReduction;
         public static StatDef VMM_MeleeCounterChance;

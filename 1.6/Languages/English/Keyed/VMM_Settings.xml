@@ -8,6 +8,7 @@
 	<VMM_MeleeCooldownFactor_Label>Melee Cooldown Factor</VMM_MeleeCooldownFactor_Label>
 	<VMM_ArmorPenetration_Label>Melee Armor Penetration</VMM_ArmorPenetration_Label>
 
+	<VMM_MeleeParryAngle_Label>Effective Parry Angle</VMM_MeleeParryAngle_Label>
 	<VMM_MeleeParryChance_Label>Melee Parry Factor</VMM_MeleeParryChance_Label>
 	<VMM_MeleeParryDamageReduction_Label>Parry Damage Reduction Factor</VMM_MeleeParryDamageReduction_Label>
 	<VMM_MeleeCounterChance_Label>Counter Attack Factor</VMM_MeleeCounterChance_Label>

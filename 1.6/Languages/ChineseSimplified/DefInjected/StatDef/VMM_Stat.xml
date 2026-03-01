@@ -8,4 +8,7 @@
 
 	<VMM_MeleeCounterChance.label>近战格挡反击概率</VMM_MeleeCounterChance.label>
 	<VMM_MeleeCounterChance.description>格挡成功后立刻发动反击的概率</VMM_MeleeCounterChance.description>
+	
+	<VMM_MeleeParryAngle.label>有效格挡角度</VMM_MeleeParryAngle.label>
+	<VMM_MeleeParryAngle.description>该数值定义了角色能够进行格挡的最大角度。例如，数值为90时，角色仅会对正面90°内的近战攻击尝试格挡；当数值为最小值0时，角色将无法进行格挡；当数值为最大值360时，角色可以对任意方向的近战攻击尝试格挡。</VMM_MeleeParryAngle.description>
 </LanguageData>

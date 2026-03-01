@@ -30,6 +30,11 @@ namespace VMM_VanillaMeleeModes.Patches
             if(!CanParry(defender))
                 return;
 
+            float parryAngle = defender.GetStatValue(VMM_StatDefOf.VMM_MeleeParryAngle);
+
+            if (!IsValidAngle(dinfo, defender, parryAngle))
+                return;
+            
             float parryChance = defender.GetStatValue(VMM_StatDefOf.VMM_MeleeParryChance);
             float parryDamageReduction = defender.GetStatValue(VMM_StatDefOf.VMM_MeleeParryDamageReduction);
             float counterChance = defender.GetStatValue(VMM_StatDefOf.VMM_MeleeCounterChance);
@@ -155,6 +160,17 @@ namespace VMM_VanillaMeleeModes.Patches
                 return false;
 
             return true;
+        }
+
+        private static bool IsValidAngle(DamageInfo dinfo, Pawn defender,float meleeParryAngle)
+        {
+            if(meleeParryAngle <= 0f)
+                return false;
+            float attackerAngle = dinfo.Angle + 180f;
+            float defenderAngle = defender.Rotation.AsAngle;
+            float angleDiff = Mathf.Abs(Mathf.DeltaAngle(defenderAngle, attackerAngle));
+
+            return angleDiff <= meleeParryAngle / 2f;
         }
 
         private static bool CanParry(Pawn defender)
