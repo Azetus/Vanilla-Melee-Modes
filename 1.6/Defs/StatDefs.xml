@@ -8,6 +8,7 @@
 		<category>PawnCombat</category>
 		<workerClass>VMM_VanillaMeleeModes.Stat.VMM_StatWorker</workerClass>
 		<toStringStyle>PercentZero</toStringStyle>
+		<toStringStyleUnfinalized>FloatOne</toStringStyleUnfinalized>
 		<defaultBaseValue>0</defaultBaseValue>
 		<minValue>0</minValue>
 		<maxValue>0.9</maxValue>
@@ -69,6 +70,7 @@
 		<category>PawnCombat</category>
 		<workerClass>VMM_VanillaMeleeModes.Stat.VMM_StatWorker</workerClass>
 		<toStringStyle>PercentZero</toStringStyle>
+		<toStringStyleUnfinalized>FloatOne</toStringStyleUnfinalized>
 		<defaultBaseValue>0</defaultBaseValue>
 		<minValue>0.5</minValue>
 		<maxValue>1</maxValue>
@@ -129,6 +131,7 @@
 		<category>PawnCombat</category>
 		<workerClass>VMM_VanillaMeleeModes.Stat.VMM_StatWorker</workerClass>
 		<toStringStyle>PercentZero</toStringStyle>
+		<toStringStyleUnfinalized>FloatOne</toStringStyleUnfinalized>
 		<defaultBaseValue>0</defaultBaseValue>
 		<minValue>0</minValue>
 		<maxValue>0.9</maxValue>
