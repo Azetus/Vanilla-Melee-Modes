@@ -23,7 +23,10 @@ namespace VMM_VanillaMeleeModes.Patches
 
             if (dinfo.Instigator is not Pawn attacker)
                 return;
-
+            
+            if (!defender.Spawned || !attacker.Spawned || defender.Map == null)
+                return;
+            
             if (!IsValidMeleeAttack(dinfo, defender))
                 return;
             
@@ -45,18 +48,21 @@ namespace VMM_VanillaMeleeModes.Patches
             {
                 float newAmount = dinfo.Amount * (MathF.Max(0f, 1f - parryDamageReduction));
 
-                MoteMaker.ThrowText(
-                    defender.DrawPos,
-                    defender.Map,
-                    "VMM_MoteText_Parry".Translate(),
-                    3f);
-                FleckMaker.ThrowMicroSparks(
-                    defender.DrawPos,
-                    defender.Map);
 
-                SoundDefOf.MetalHitImportant.PlayOneShot(
-                    new TargetInfo(defender.Position, defender.Map)
+                if (defender.Map != null){
+                    MoteMaker.ThrowText(
+                        defender.DrawPos,
+                        defender.Map,
+                        "VMM_MoteText_Parry".Translate(),
+                        3f);
+                    FleckMaker.ThrowMicroSparks(
+                        defender.DrawPos,
+                        defender.Map);
+
+                    SoundDefOf.MetalHitImportant.PlayOneShot(
+                        new TargetInfo(defender.Position, defender.Map)
                     );
+                }
 
                 dinfo.SetAmount(newAmount);
 
@@ -107,11 +113,13 @@ namespace VMM_VanillaMeleeModes.Patches
                 if (attackSuccess)
                 {
                     defender.health.AddHediff(VMM_HediffDefOf.VMM_CounterAttackCooldown);
-                    MoteMaker.ThrowText(defender.DrawPos,
-                        defender.Map,
-                        "VMM_MoteText_Counter".Translate(),
-                        Color.red,
-                        3f);
+                    if (defender.Map != null){
+                        MoteMaker.ThrowText(defender.DrawPos,
+                            defender.Map,
+                            "VMM_MoteText_Counter".Translate(),
+                            Color.red,
+                            3f);
+                    }
                 }
             }
 
