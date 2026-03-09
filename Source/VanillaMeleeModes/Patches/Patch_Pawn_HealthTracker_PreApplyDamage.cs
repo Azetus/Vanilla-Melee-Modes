@@ -7,41 +7,41 @@ using VMM_VanillaMeleeModes.DefOfs;
 
 namespace VMM_VanillaMeleeModes.Patches
 {
-    [HarmonyPatch(typeof(Thing), nameof(Thing.TakeDamage))]
-    public static class Patch_Thing_TakeDamage
+    [HarmonyPatch(typeof(Pawn_HealthTracker), nameof(Pawn_HealthTracker.PreApplyDamage))]
+    public static class Patch_Pawn_HealthTracker_PreApplyDamage
     {
-        static void Prefix(Thing __instance, ref DamageInfo dinfo)
+        static void Prefix(Pawn_HealthTracker __instance, ref DamageInfo dinfo, ref bool absorbed, Pawn ___pawn)
         {
             if (!VanillaMeleeModes.settings.enable_VMM_parry)
                 return;
-            
-            if (__instance is not Pawn defender)
+
+            if (___pawn is not Pawn defender)
                 return;
-            
-            if(!FactionCheck(defender))
+
+            if (!FactionCheck(defender))
                 return;
 
             if (dinfo.Instigator is not Pawn attacker)
                 return;
-            
+
             if (!defender.Spawned || !attacker.Spawned || defender.Map == null)
                 return;
-            
+
             if (!IsValidMeleeAttack(dinfo, defender))
                 return;
-            
-            if(!CanParry(defender))
+
+            if (!CanParry(defender))
                 return;
 
             float parryAngle = defender.GetStatValue(VMM_StatDefOf.VMM_MeleeParryAngle);
 
             if (!IsValidAngle(dinfo, defender, parryAngle))
                 return;
-            
+
             float parryChance = defender.GetStatValue(VMM_StatDefOf.VMM_MeleeParryChance);
             float parryDamageReduction = defender.GetStatValue(VMM_StatDefOf.VMM_MeleeParryDamageReduction);
             float counterChance = defender.GetStatValue(VMM_StatDefOf.VMM_MeleeCounterChance);
-            
+
             float weaponFactor = GetWeaponParryFactor(defender);
             // 是否触发格挡
             if (Rand.Chance(parryChance * weaponFactor))
@@ -49,7 +49,8 @@ namespace VMM_VanillaMeleeModes.Patches
                 float newAmount = dinfo.Amount * (MathF.Max(0f, 1f - parryDamageReduction));
 
 
-                if (defender.Map != null){
+                if (defender.Map != null)
+                {
                     MoteMaker.ThrowText(
                         defender.DrawPos,
                         defender.Map,
@@ -62,6 +63,11 @@ namespace VMM_VanillaMeleeModes.Patches
                     SoundDefOf.MetalHitImportant.PlayOneShot(
                         new TargetInfo(defender.Position, defender.Map)
                     );
+                }
+
+                if (newAmount <= 0)
+                {
+                    absorbed = true;
                 }
 
                 dinfo.SetAmount(newAmount);
@@ -88,12 +94,12 @@ namespace VMM_VanillaMeleeModes.Patches
             if (verb == null || verb is not Verb_MeleeAttack meleeVerb)
                 return;
 
-            if(!CanCounter(defender, attacker, meleeVerb)) 
-                return;  
+            if (!CanCounter(defender, attacker, meleeVerb))
+                return;
 
             if (defender.stances != null)
             {
-                if(defender.stances.curStance is Stance_Cooldown)
+                if (defender.stances.curStance is Stance_Cooldown)
                 {
                     defender.stances.CancelBusyStanceHard();
                 }
@@ -108,12 +114,14 @@ namespace VMM_VanillaMeleeModes.Patches
                     attacker));
 
 
-                bool attackSuccess = verb.TryStartCastOn(attacker, canHitNonTargetPawns: false, nonInterruptingSelfCast: true);
+                bool attackSuccess =
+                    verb.TryStartCastOn(attacker, canHitNonTargetPawns: false, nonInterruptingSelfCast: true);
 
                 if (attackSuccess)
                 {
                     defender.health.AddHediff(VMM_HediffDefOf.VMM_CounterAttackCooldown);
-                    if (defender.Map != null){
+                    if (defender.Map != null)
+                    {
                         MoteMaker.ThrowText(defender.DrawPos,
                             defender.Map,
                             "VMM_MoteText_Counter".Translate(),
@@ -122,7 +130,6 @@ namespace VMM_VanillaMeleeModes.Patches
                     }
                 }
             }
-
         }
 
         // 是否持有武器
@@ -139,7 +146,7 @@ namespace VMM_VanillaMeleeModes.Patches
 
             return 1f;
         }
-        
+
         // 可格挡伤害来源
         private static bool IsValidMeleeAttack(DamageInfo dinfo, Pawn defender)
         {
@@ -162,7 +169,7 @@ namespace VMM_VanillaMeleeModes.Patches
             // 排除处决
             if (dinfo.Def.execution)
                 return false;
-            
+
             // 排除非武器和肢体
             if (dinfo.Weapon == null && dinfo.WeaponBodyPartGroup == null)
                 return false;
@@ -170,9 +177,9 @@ namespace VMM_VanillaMeleeModes.Patches
             return true;
         }
 
-        private static bool IsValidAngle(DamageInfo dinfo, Pawn defender,float meleeParryAngle)
+        private static bool IsValidAngle(DamageInfo dinfo, Pawn defender, float meleeParryAngle)
         {
-            if(meleeParryAngle <= 0f)
+            if (meleeParryAngle <= 0f)
                 return false;
             float attackerAngle = dinfo.Angle + 180f;
             float defenderAngle = defender.Rotation.AsAngle;
@@ -183,7 +190,7 @@ namespace VMM_VanillaMeleeModes.Patches
 
         private static bool CanParry(Pawn defender)
         {
-            if(defender == null)
+            if (defender == null)
                 return false;
             // 排除死亡或倒下
             if (defender.Dead || defender.Downed)
@@ -192,7 +199,7 @@ namespace VMM_VanillaMeleeModes.Patches
             if (defender.RaceProps == null || !(defender.RaceProps.Humanlike || defender.RaceProps.IsMechanoid))
                 return false;
             // 必须有操作能力
-            if(!defender.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation))
+            if (!defender.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation))
                 return false;
             // 无法移动
             if (IsImmobile(defender))
@@ -201,7 +208,7 @@ namespace VMM_VanillaMeleeModes.Patches
             if (defender.stances?.stunner?.Stunned ?? false)
                 return false;
             // 排除社交斗殴
-            if(defender.MentalStateDef == MentalStateDefOf.SocialFighting)
+            if (defender.MentalStateDef == MentalStateDefOf.SocialFighting)
                 return false;
 
             return true;
@@ -239,7 +246,7 @@ namespace VMM_VanillaMeleeModes.Patches
             if (defender.MentalStateDef == MentalStateDefOf.SocialFighting)
                 return false;
             // 是否能打中目标
-            if(!meleeVerb.CanHitTarget(attacker))
+            if (!meleeVerb.CanHitTarget(attacker))
                 return false;
 
 
@@ -252,6 +259,7 @@ namespace VMM_VanillaMeleeModes.Patches
             {
                 return pawn.GetPosture() != PawnPosture.Standing;
             }
+
             return true;
         }
 
