@@ -7,15 +7,16 @@ using VMM_VanillaMeleeModes.DefOfs;
 
 namespace VMM_VanillaMeleeModes.Patches
 {
-    [HarmonyPatch(typeof(Pawn_HealthTracker), nameof(Pawn_HealthTracker.PreApplyDamage))]
-    public static class Patch_Pawn_HealthTracker_PreApplyDamage
+    [HarmonyPatch(typeof(Pawn), nameof(Pawn.PreApplyDamage))]
+    public static class Patch_Pawn_PreApplyDamage
     {
-        static void Prefix(Pawn_HealthTracker __instance, ref DamageInfo dinfo, ref bool absorbed, Pawn ___pawn)
+        static void Prefix(Pawn __instance, ref DamageInfo dinfo, out bool absorbed)
         {
+            absorbed = false;
             if (!VanillaMeleeModes.settings.enable_VMM_parry)
                 return;
 
-            if (___pawn is not Pawn defender)
+            if (__instance is not Pawn defender)
                 return;
 
             if (!FactionCheck(defender))

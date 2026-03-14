@@ -3,7 +3,7 @@ using VMM_VanillaMeleeModes.Settings;
 
 namespace VMM_VanillaMeleeModes.Utilities
 {
-    public class Utils
+    public static class Utils
     {
         public static string GetMeleeModeLabelFor(VMM_MeleeMode mode)
         {
