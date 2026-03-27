@@ -19,4 +19,6 @@
 	<VMM_EnableVanillaParry_Label>啟用格擋機制</VMM_EnableVanillaParry_Label>
 	<VMM_EnableVanillaCounterattack_Label>啟用反擊機制</VMM_EnableVanillaCounterattack_Label>
 	<VMM_EnableVanillaParryAndCounterattackForNpc_Label>為NPC啟用格擋與反擊</VMM_EnableVanillaParryAndCounterattackForNpc_Label>
+
+	<VMM_AlwaysDisplayGizmo_Label>非征召狀態下顯示按鈕</VMM_AlwaysDisplayGizmo_Label>
 </LanguageData>

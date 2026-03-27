@@ -24,7 +24,10 @@ namespace VMM_VanillaMeleeModes.ModSettingUI
             Listing_Standard ls = new Listing_Standard();
             ls.Begin(viewRect);
 
-
+            ls.CheckboxLabeled(
+                "VMM_AlwaysDisplayGizmo_Label".Translate(),
+                ref settings.alwaysDisplayGizmo
+            );
             if (!VanillaMeleeModes.isCEActive)
             {
                 // Vanilla Parry & Counterattack
@@ -43,8 +46,8 @@ namespace VMM_VanillaMeleeModes.ModSettingUI
                         ref settings.enable_VMM_parryAndCounterattackForNpc
                     );
                 }
-            
-                
+
+
                 // 强攻
                 DrawSettingGroup(
                     ls,
@@ -149,6 +152,7 @@ namespace VMM_VanillaMeleeModes.ModSettingUI
             ;
             if (Widgets.ButtonText(resetRect, "VMM_ResetButton_Label".Translate()))
             {
+                settings.ResetGeneralSetting();
                 if (!VanillaMeleeModes.isCEActive)
                 {
                     settings.ResetSetting();

@@ -26,7 +26,7 @@ namespace VMM_VanillaMeleeModes.Comps
         {
             if (parent is Pawn pawn &&
                 (pawn.IsColonistPlayerControlled || pawn.IsColonyMechPlayerControlled || pawn.IsColonySubhumanPlayerControlled) &&
-                pawn.Drafted
+                (pawn.Drafted || MeleeModeDB.Settings.alwaysDisplayGizmo)
                 ) {
                 yield return new Command_Action
                 {

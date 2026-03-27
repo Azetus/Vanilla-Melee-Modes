@@ -48,7 +48,7 @@ namespace VMM_VanillaMeleeModes.Settings
         public bool enable_VMM_parry = true;
         public bool enable_VMM_counterattack = true;
         public bool enable_VMM_parryAndCounterattackForNpc = true;
-        
+
         #endregion
 
         #region CE
@@ -83,6 +83,13 @@ namespace VMM_VanillaMeleeModes.Settings
 
         public float CE_guard_MeleeParryChance = 1.6f;
         public float CE_guard_MeleeCritChance = 1f;
+
+        #endregion
+
+        #region General
+
+        // ------ 非征召状态显示按钮 ------
+        public bool alwaysDisplayGizmo = false;
 
         #endregion
 
@@ -133,7 +140,7 @@ namespace VMM_VanillaMeleeModes.Settings
             Scribe_Values.Look(ref enable_VMM_parry, "enable_VMM_parry", true);
             Scribe_Values.Look(ref enable_VMM_counterattack, "enable_VMM_counterattack", true);
             Scribe_Values.Look(ref enable_VMM_parryAndCounterattackForNpc, "enable_VMM_parryAndCounterattackForNpc", true);
-            
+
             #endregion
 
             #region CE ExposeData
@@ -168,9 +175,17 @@ namespace VMM_VanillaMeleeModes.Settings
 
             #endregion
 
+            // ------ 非征召状态显示按钮 ------
+            Scribe_Values.Look(ref alwaysDisplayGizmo, "alwaysDisplayGizmo", false);
+
             base.ExposeData();
         }
 
+        public void ResetGeneralSetting()
+        {
+            alwaysDisplayGizmo =  false;
+        }
+        
         public void ResetSetting()
         {
             // ------------ Vanilla ------------
@@ -210,8 +225,8 @@ namespace VMM_VanillaMeleeModes.Settings
             guard_MeleeParryChance = 1.6f;
             guard_MeleeParryDamageReduction = 1.5f;
             guard_MeleeCounterChance = 0.7f;
-            
-        // ------ 基础设置 ------
+
+            // ------ 基础设置 ------
             enable_VMM_parry = true;
             enable_VMM_counterattack = true;
             enable_VMM_parryAndCounterattackForNpc = true;
