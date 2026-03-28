@@ -3,8 +3,8 @@ using UnityEngine;
 using Verse;
 using Verse.Sound;
 using VMM_VanillaMeleeModes.Settings;
-using static VMM_VanillaMeleeModes.ModSettingUI.VMM_UI_SettingGroup;
 using static VMM_VanillaMeleeModes.ModSettingUI.VMM_CE_UI_SettingGroup;
+using static VMM_VanillaMeleeModes.ModSettingUI.VMM_UI_SettingGroup;
 
 namespace VMM_VanillaMeleeModes.ModSettingUI
 {
