@@ -91,6 +91,10 @@ namespace VMM_VanillaMeleeModes.Settings
         // ------ 非征召状态显示按钮 ------
         public bool alwaysDisplayGizmo = false;
 
+        // ------ 自动选择模式 (Auto Selection) ------
+        public bool enableAutoSelectionForPlayer = true;
+        public bool enableAutoSelectionForNPC = true;
+
         #endregion
 
         public override void ExposeData()
@@ -178,14 +182,20 @@ namespace VMM_VanillaMeleeModes.Settings
             // ------ 非征召状态显示按钮 ------
             Scribe_Values.Look(ref alwaysDisplayGizmo, "alwaysDisplayGizmo", false);
 
+            // ------ 自动选择模式 (Auto Selection) ------
+            Scribe_Values.Look(ref enableAutoSelectionForPlayer, nameof(enableAutoSelectionForPlayer), true);
+            Scribe_Values.Look(ref enableAutoSelectionForNPC, nameof(enableAutoSelectionForNPC), true);
+
             base.ExposeData();
         }
 
         public void ResetGeneralSetting()
         {
-            alwaysDisplayGizmo =  false;
+            alwaysDisplayGizmo = false;
+            enableAutoSelectionForPlayer = true;
+            enableAutoSelectionForNPC = true;
         }
-        
+
         public void ResetSetting()
         {
             // ------------ Vanilla ------------

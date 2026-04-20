@@ -28,6 +28,14 @@ namespace VMM_VanillaMeleeModes.ModSettingUI
                 "VMM_AlwaysDisplayGizmo_Label".Translate(),
                 ref settings.alwaysDisplayGizmo
             );
+            ls.CheckboxLabeled(
+                "VMM_EnableAutoSelectionForPlayer_Label".Translate(),
+                ref settings.enableAutoSelectionForPlayer
+            );
+            ls.CheckboxLabeled(
+                "VMM_EnableAutoSelectionForNPC_Label".Translate(),
+                ref settings.enableAutoSelectionForNPC
+            );
             if (!VanillaMeleeModes.isCEActive)
             {
                 // Vanilla Parry & Counterattack
