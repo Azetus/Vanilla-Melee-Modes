@@ -81,6 +81,7 @@ namespace VMM_VanillaMeleeModes.Comps
                         toggleAction = () =>
                         {
                             curEnableAutoSelection = !curEnableAutoSelection;
+                            // curMode = VMM_MeleeMode.Default; // TODO: 测试完之后解除注释
                             SoundDefOf.Tick_High.PlayOneShotOnCamera();
                         }
                     };
@@ -181,18 +182,25 @@ namespace VMM_VanillaMeleeModes.Comps
             int enemiesInRange = GetEnemiesInMeleeRange(pawn);
             int enemiesAttackingMe = GetEnemiesAttackingMe(pawn);
             int alliesInRange = GetAlliesInMeleeRange(pawn);
+            float avgEnemyDPS = GetAverageEnemyMeleeDPS(pawn);
+            float targetArmor = GetCurrentTargetArmor(pawn);
 
+            // TODO: 加权系数还需要再调整下
             // 强攻模式得分
             float aggressiveScore = (targetMissing * 2.2f)
                                     + (alliesInRange * 18f)
                                     - (enemiesAttackingMe * 15f)
-                                    - (selfMissing * 0.9f);
+                                    - (selfMissing * 0.9f)
+                                    - (avgEnemyDPS * 14f)
+                                    + (targetArmor * 24f);
 
             // 迅捷模式得分
             float flurryScore = (enemiesInRange * 14f)
                                 + (enemiesAttackingMe * 9f)
                                 + (alliesInRange * 22f)
-                                - (targetMissing * 0.7f);
+                                - (targetMissing * 0.7f)
+                                + (avgEnemyDPS * 16f)
+                                - (targetArmor * 11f);
 
             // 默认得分（带轻微随机抖动）
             float defaultScore = 38f + Mathf.Sin(GenTicks.TicksGame / 25f) * 9f;
@@ -284,6 +292,38 @@ namespace VMM_VanillaMeleeModes.Comps
             }
 
             return count;
+        }
+
+        // 计算近战范围内所有敌人的平均近战DPS
+        private static float GetAverageEnemyMeleeDPS(Pawn pawn)
+        {
+            float totalDPS = 0f;
+            int count = 0;
+
+            foreach (Thing t in GenRadial.RadialDistinctThingsAround(pawn.Position, pawn.Map, 1.9f, true))
+            {
+                if (t is Pawn other && other.HostileTo(pawn) && !other.Downed)
+                {
+                    totalDPS += other.GetStatValue(StatDefOf.MeleeDPS);
+                    count++;
+                }
+            }
+
+            return count > 0 ? totalDPS / count : 0f;
+        }
+
+        // 只计算当前攻击目标的护甲
+        private static float GetCurrentTargetArmor(Pawn pawn)
+        {
+            var target = GetCurrentTarget(pawn);
+            if (target == null) return 0f;
+            // TODO: 之后最好改成根据 pawn 所持武器的主要伤害类型判断
+            // 锐器护甲
+            float sharp = target.GetStatValue(StatDefOf.ArmorRating_Sharp);
+            if (sharp > 0.01f) return sharp;
+
+            // 钝器护甲
+            return target.GetStatValue(StatDefOf.ArmorRating_Blunt);
         }
     }
 }
