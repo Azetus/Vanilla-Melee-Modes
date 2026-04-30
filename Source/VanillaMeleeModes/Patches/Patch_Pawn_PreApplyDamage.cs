@@ -167,6 +167,10 @@ namespace VMM_VanillaMeleeModes.Patches
             if (dinfo.Def.isExplosive)
                 return false;
 
+            // 排除 EMP
+            if (dinfo.Def == DamageDefOf.EMP)
+                return false;
+
             // 排除处决
             if (dinfo.Def.execution)
                 return false;
