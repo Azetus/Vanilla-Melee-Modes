@@ -41,7 +41,7 @@ namespace VMM_VanillaMeleeModes.Patches
 
             float parryChance = defender.GetStatValue(VMM_StatDefOf.VMM_MeleeParryChance);
             float parryDamageReduction = defender.GetStatValue(VMM_StatDefOf.VMM_MeleeParryDamageReduction);
-            float counterChance = defender.GetStatValue(VMM_StatDefOf.VMM_MeleeCounterChance);
+
 
             float weaponFactor = GetWeaponParryFactor(defender);
             // 是否触发格挡
@@ -77,8 +77,8 @@ namespace VMM_VanillaMeleeModes.Patches
                     defender,
                     VMM_RulePackDefOf.VMM_Melee_Parried,
                     attacker));
-                // 是否触发反击
-                if (VanillaMeleeModes.settings.enable_VMM_counterattack && Rand.Chance(counterChance * weaponFactor))
+                // 反击设置是否开启
+                if (VanillaMeleeModes.settings.enable_VMM_counterattack)
                 {
                     TryCounter(defender, attacker);
                 }
@@ -197,6 +197,17 @@ namespace VMM_VanillaMeleeModes.Patches
         {
             if (defender == null)
                 return false;
+
+            // stat VMM_MeleeParryChance 是否被禁用
+            if (VMM_StatDefOf.VMM_MeleeParryChance.Worker.IsDisabledFor(defender))
+                return false;
+            // stat VMM_MeleeParryAngle 是否被禁用
+            if (VMM_StatDefOf.VMM_MeleeParryAngle.Worker.IsDisabledFor(defender))
+                return false;
+            // stat VMM_MeleeParryDamageReduction 是否被禁用
+            if (VMM_StatDefOf.VMM_MeleeParryDamageReduction.Worker.IsDisabledFor(defender))
+                return false;
+
             // 排除死亡或倒下
             if (defender.Dead || defender.Downed)
                 return false;
@@ -223,6 +234,15 @@ namespace VMM_VanillaMeleeModes.Patches
         {
             if (defender == null || attacker == null || meleeVerb == null)
                 return false;
+
+            // stat VMM_MeleeCounterChance 是否被禁用
+            if (VMM_StatDefOf.VMM_MeleeCounterChance.Worker.IsDisabledFor(defender))
+                return false;
+            float counterChance = defender.GetStatValue(VMM_StatDefOf.VMM_MeleeCounterChance);
+            float weaponFactor = GetWeaponParryFactor(defender);
+            if(!Rand.Chance(counterChance * weaponFactor))
+                return false;
+            
             // 排除死亡或倒下
             if (defender.Dead || defender.Downed)
                 return false;
