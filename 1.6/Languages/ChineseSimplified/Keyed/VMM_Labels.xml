@@ -6,7 +6,10 @@
 	<VMM_FlurryMode>迅捷连击</VMM_FlurryMode>
 	<VMM_GuardMode>防御姿态</VMM_GuardMode>
 	<VMM_SwitchGizmoDesc>切换近战模式</VMM_SwitchGizmoDesc>
-	
+
 	<VMM_MoteText_Parry>格挡！</VMM_MoteText_Parry>
 	<VMM_MoteText_Counter>反击！</VMM_MoteText_Counter>
+	<VMM_AutoMode>自动切换</VMM_AutoMode>
+	<VMM_AutoMode_Desc>切换自动近战模式选择。
+开启后，角色将根据战斗情况自动选择最佳近战模式。</VMM_AutoMode_Desc>
 </LanguageData>

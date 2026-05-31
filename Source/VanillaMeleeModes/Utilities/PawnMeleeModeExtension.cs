@@ -1,4 +1,4 @@
-﻿using Verse;
+using Verse;
 using VMM_VanillaMeleeModes.Comps;
 using VMM_VanillaMeleeModes.Settings;
 
@@ -25,15 +25,6 @@ namespace VMM_VanillaMeleeModes.Utilities
             {
                 VMM_Comp.curMode = mode;
             }
-        }
-        
-        public static bool VMM_enableAutoSelection(this Pawn pawn) {
-            if(pawn == null)
-                return false;
-
-            var comp = pawn.TryGetComp<VMM_PawnCompMeleeMode>();
-
-            return comp?.curEnableAutoSelection ?? false;
         }
     }
 }

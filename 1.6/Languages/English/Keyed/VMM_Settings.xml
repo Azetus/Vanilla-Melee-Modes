@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 	<VMM_ResetButton_Label>Reset To Default</VMM_ResetButton_Label>
 
@@ -19,6 +19,9 @@
 	<VMM_EnableVanillaParry_Label>Enable Parrying Mechanism</VMM_EnableVanillaParry_Label>
 	<VMM_EnableVanillaCounterattack_Label>Enable Counterattack Mechanism</VMM_EnableVanillaCounterattack_Label>
 	<VMM_EnableVanillaParryAndCounterattackForNpc_Label>Enable Parrying and Counterattacking for NPCs</VMM_EnableVanillaParryAndCounterattackForNpc_Label>
+
+	<VMM_EnableAutoSelectionForPlayer_Label>Enable auto-selection melee mode for colonists</VMM_EnableAutoSelectionForPlayer_Label>
+	<VMM_EnableAutoSelectionForNPC_Label>Enable auto-selection melee mode for NPCs</VMM_EnableAutoSelectionForNPC_Label>
 
 	<VMM_AlwaysDisplayGizmo_Label>Show gizmo buttons when undrafted</VMM_AlwaysDisplayGizmo_Label>
 </LanguageData>
