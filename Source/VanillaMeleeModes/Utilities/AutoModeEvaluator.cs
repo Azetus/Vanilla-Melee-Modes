@@ -9,7 +9,7 @@ namespace VMM_VanillaMeleeModes.Utilities
     {
         // 评估常量
         public const float EMERGENCY_HP_THRESHOLD = 0.3f;
-        public const int EMERGENCY_THREAT_COUNT = 3;
+        public const int EMERGENCY_THREAT_COUNT = 5;
         public const float THREAT_SEARCH_RADIUS = 1.9f;
         public const float HYSTERESIS_MULTIPLIER = 1.15f;
 
@@ -68,7 +68,7 @@ namespace VMM_VanillaMeleeModes.Utilities
             }
             // TODO: 判断条件可以改大一点
             // 被围或孤立被围
-            if (enemyCount >= EMERGENCY_THREAT_COUNT || (enemyCount >= 2 && allyCount == 0))
+            if (enemyCount >= EMERGENCY_THREAT_COUNT || (enemyCount >= 3 && allyCount == 0))
             {
                 result = VMM_MeleeMode.Guard;
                 return true;
