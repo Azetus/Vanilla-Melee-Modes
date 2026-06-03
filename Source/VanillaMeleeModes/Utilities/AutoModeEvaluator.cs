@@ -13,6 +13,15 @@ namespace VMM_VanillaMeleeModes.Utilities
         public const float THREAT_SEARCH_RADIUS = 1.9f;
         public const float HYSTERESIS_MULTIPLIER = 1.15f;
 
+        // CE 替代评估器（CE 子 DLL 通过 RegisterCEEvaluator 挂载）
+        private static Func<Pawn, Thing?, VMM_MeleeMode, VMM_MeleeMode>? _evaluator = null;
+
+        public static void RegisterCEEvaluator(
+            Func<Pawn, Thing?, VMM_MeleeMode, VMM_MeleeMode> evaluator)
+        {
+            _evaluator = evaluator;
+        }
+
         // 是否处于近战战斗
         public static bool IsInMeleeCombat(Pawn pawn)
         {
@@ -41,6 +50,9 @@ namespace VMM_VanillaMeleeModes.Utilities
         public static VMM_MeleeMode Evaluate(Pawn pawn, Thing? target,
             VMM_MeleeMode currentMode)
         {
+            if (_evaluator != null)
+                return _evaluator(pawn, target, currentMode);
+
             // 采集战场上下文
             int enemyCount = CountNearbyThreats(pawn);
             int allyCount = CountNearbyAllies(pawn);

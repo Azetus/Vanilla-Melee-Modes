@@ -17,11 +17,18 @@ namespace VMM_VanillaMeleeModes
             settings = GetSettings<VanillaMeleeModesModSetting>();
             isCEActive = ModLister.GetActiveModWithIdentifier("CETeam.CombatExtended") != null;
             
-            // Mod针对原版环境添加了格挡反击并修改了护甲穿透，检测到CE加载时不要Patch这部分内容
+            var harmony = new Harmony("Aliza.VanillaMeleeModes");
+
             if (!isCEActive)
             {
-                new Harmony("Aliza.VanillaMeleeModes").PatchAll();
+                // 原版模式：加载全部补丁
+                harmony.PatchAll();
                 Log.Message("<color=cyan>[VanillaMeleeModes]</color> applying vanilla patches.");
+            }
+            else
+            {
+                // CE 模式：仅加载自动切换功能的 StartJob 入口
+                harmony.CreateClassProcessor(typeof(Patches.Patch_AutoMode_OnPlayerMeleeJob)).Patch();
             }
             
             Log.Message("<color=cyan>[VanillaMeleeModes]</color> is loaded!");
