@@ -131,16 +131,15 @@ namespace VMM_VanillaMeleeModes.Utilities
 
             // 进攻分：累加上下文加成
             float aggScore = 1.0f
-                + (selfHP - 0.5f) * 2.0f           // 血量优势
+                + 0.3f                               // 模式基础进攻优势
                 + targetMissingHP * 1.5f           // 收割冲动
                 + allyCount * 0.25f                // 有队友时更敢输出
                 - (enemyCount - 1) * 0.4f          // 多目标输出受限
                 + Mathf.Min(targetArmor, 1.5f) * 0.6f;  // 高甲目标需穿甲
 
             float flurryScore = 1.0f
-                + (meleeSkill / 20f) * 1.2f        // 高手技能兑现
+                + (meleeSkill / 20f) * 1.5f        // 高手技能兑现
                 + Mathf.Min(targetDodge / 0.3f, 1f) * 1.0f  // 克制高闪避
-                + (enemyCount == 1 ? 0.5f : 0f)    // 单挑加成
                 - Mathf.Max(enemyCount - 1, 0) * 0.4f  // 多目标连击无效
                 - targetMissingHP * 1.0f           // 残血目标浪费连击
                 - Mathf.Min(targetArmor, 1.5f) * 0.7f;  // 高甲弹刀
