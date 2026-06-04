@@ -1,3 +1,4 @@
+using CombatExtended;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -82,45 +83,87 @@ namespace VMM_VanillaMeleeModes.Patch_CombatExtended.Utilities
             VMM_MeleeMode currentMode)
         {
             // 采集评分输入因子
-            float selfHP = pawn.health.summaryHealth.SummaryHealthPercent;
             float meleeSkill = pawn.skills.GetSkill(SkillDefOf.Melee)?.Level ?? 0f;
 
-            float targetHP = 1f;
             float targetDodge = 0f;
             float targetArmor = 0f;
+            float armorWeight = 1.0f;
             if (target is Pawn tp)
             {
-                targetHP = tp.health.summaryHealth.SummaryHealthPercent;
                 targetDodge = tp.GetStatValue(StatDefOf.MeleeDodgeChance);
 
-                // CE 护甲归一化：mm RHA → 原版 0~2 尺度
-                float sharp = tp.GetStatValue(StatDefOf.ArmorRating_Sharp);
-                float blunt = tp.GetStatValue(StatDefOf.ArmorRating_Blunt);
-                targetArmor = Mathf.Max(sharp, blunt) / ARMOR_NORMALIZATION_FACTOR;
+                if (tp.apparel != null)
+                {
+                    // 反推两种基础穿甲
+                    var verb = pawn.meleeVerbs.TryGetMeleeVerb(target);
+                    var verbCE = verb as Verb_MeleeAttackCE;
+                    float rawSharpAP = verbCE?.ArmorPenetrationSharp ?? 0f;
+                    float rawBluntAP = verbCE?.ArmorPenetrationBlunt ?? 0f;
+                    float currentFactor = MeleeModeDB_CE.GetMeleeArmorPenetration_CE(
+                        currentMode);
+                    float baseSharpAP = currentFactor > 0.01f
+                        ? rawSharpAP / currentFactor : rawSharpAP;
+                    float baseBluntAP = currentFactor > 0.01f
+                        ? rawBluntAP / currentFactor : rawBluntAP;
+
+                    // 武器主导：取 AP 更高的维度，仅读该维度的护甲
+                    bool useSharp = baseSharpAP >= baseBluntAP;
+                    StatDef armorStat = useSharp
+                        ? StatDefOf.ArmorRating_Sharp
+                        : StatDefOf.ArmorRating_Blunt;
+                    float baseAP = useSharp ? baseSharpAP : baseBluntAP;
+
+                    float rawArmor = 0f;
+                    foreach (var a in tp.apparel.WornApparel)
+                        rawArmor = Mathf.Max(rawArmor, a.GetStatValue(armorStat));
+                    // 裸体目标 targetArmor 保持 0 → 护甲加减分消失，正确行为
+                    targetArmor = rawArmor / ARMOR_NORMALIZATION_FACTOR;
+
+                    if (rawArmor > 0.01f)
+                    {
+                        float aggAP = baseAP
+                            * MeleeModeDB_CE.GetMeleeArmorPenetration_CE(
+                                VMM_MeleeMode.Aggressive);
+                        float flurryAP = baseAP
+                            * MeleeModeDB_CE.GetMeleeArmorPenetration_CE(
+                                VMM_MeleeMode.Flurry);
+
+                        if (aggAP >= rawArmor && flurryAP < rawArmor)
+                            armorWeight = 3.0f;
+                        else if (flurryAP >= rawArmor)
+                            armorWeight = 0.5f;
+                        else
+                            armorWeight = 1.0f;
+                    }
+                }
             }
-            float targetMissingHP = 1f - targetHP;
 
-            // 进攻分：累加上下文加成（与原版完全相同的公式）
-            float aggScore = 1.0f
-                + 0.3f                               // 模式基础进攻优势
-                + targetMissingHP * 1.5f           // 收割冲动
-                + allyCount * 0.25f                // 有队友时更敢输出
-                - (enemyCount - 1) * 0.4f          // 多目标输出受限
-                + Mathf.Min(targetArmor, 1.5f) * 0.6f;  // 高甲目标需穿甲
+            // 各模式 raw DPS（含命中×伤害/冷却，不含AP——AP由护甲评分单独处理）
+            float aggRawDPS = MeleeModeDB_CE.GetMeleeHitChance_CE(VMM_MeleeMode.Aggressive)
+                            * MeleeModeDB_CE.GetMeleeDamageFactor_CE(VMM_MeleeMode.Aggressive)
+                            / MeleeModeDB_CE.GetMeleeCooldownFactor_CE(VMM_MeleeMode.Aggressive);
+            float flurryRawDPS = MeleeModeDB_CE.GetMeleeHitChance_CE(VMM_MeleeMode.Flurry)
+                              * MeleeModeDB_CE.GetMeleeDamageFactor_CE(VMM_MeleeMode.Flurry)
+                              / MeleeModeDB_CE.GetMeleeCooldownFactor_CE(VMM_MeleeMode.Flurry);
 
-            float flurryScore = 1.0f
+            // 进攻分：累加上下文加成
+            float aggScore = (1.0f
+                + Mathf.Min(targetArmor, 1.5f) * 0.6f * armorWeight)  // 高甲目标需穿甲
+                * aggRawDPS;
+
+            float flurryScore = (1.0f
                 + (meleeSkill / 20f) * 1.5f        // 高手技能兑现
                 + Mathf.Min(targetDodge / 0.3f, 1f) * 1.0f  // 克制高闪避
-                - Mathf.Max(enemyCount - 1, 0) * 0.4f  // 多目标连击无效
-                - targetMissingHP * 1.0f           // 残血目标浪费连击
-                - Mathf.Min(targetArmor, 1.5f) * 0.7f;  // 高甲弹刀
+                - Mathf.Min(targetArmor, 1.5f) * 0.7f * armorWeight)  // 高甲弹刀
+                * flurryRawDPS;
 
-            float defaultScore = 1.0f;              // 锚点
-
+            float defaultScore = 1.0f;
             // 防御分（仅闪避维度，格挡由规则触发）
-            float aggDef = 0.85f * (1f + (enemyCount - 1) * 0.3f);
-            float flurryDef = 1.0f * (1f + (enemyCount - 1) * 0.3f);
-            float defaultDef = 1.0f * (1f + (enemyCount - 1) * 0.3f);
+            float aggDef = MeleeModeDB_CE.GetMeleeDodgeChance_CE(VMM_MeleeMode.Aggressive)
+                * (1f + (enemyCount - 1) * 0.3f);
+            float flurryDef = MeleeModeDB_CE.GetMeleeDodgeChance_CE(VMM_MeleeMode.Flurry)
+                * (1f + (enemyCount - 1) * 0.3f);
+            float defaultDef = 1f * (1f + (enemyCount - 1) * 0.3f);
 
             // CE 专属维度：格挡 + 暴击（暴击替代原版反击）
             float aggSpecial = MeleeModeDB_CE.GetMeleeParryChanceFactor_CE(

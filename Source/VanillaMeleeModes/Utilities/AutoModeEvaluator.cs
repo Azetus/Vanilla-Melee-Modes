@@ -113,48 +113,51 @@ namespace VMM_VanillaMeleeModes.Utilities
             int enemyCount, int allyCount, VMM_MeleeMode currentMode)
         {
             // 采集评分输入因子
-            float selfHP = pawn.health.summaryHealth.SummaryHealthPercent;
             float meleeSkill = pawn.skills.GetSkill(SkillDefOf.Melee)?.Level ?? 0f;
 
-            float targetHP = 1f;
             float targetDodge = 0f;
             float targetArmor = 0f;
             if (target is Pawn tp)
             {
-                targetHP = tp.health.summaryHealth.SummaryHealthPercent;
                 targetDodge = tp.GetStatValue(StatDefOf.MeleeDodgeChance);
                 float sharp = tp.GetStatValue(StatDefOf.ArmorRating_Sharp);
                 float blunt = tp.GetStatValue(StatDefOf.ArmorRating_Blunt);
                 targetArmor = sharp > blunt ? sharp : blunt;
             }
-            float targetMissingHP = 1f - targetHP;
+
+            // 各模式 raw DPS（含命中×伤害/冷却，不含AP——AP由护甲评分单独处理）
+            float aggRawDPS = MeleeModeDB.GetMeleeHitChance(VMM_MeleeMode.Aggressive)
+                            * MeleeModeDB.GetMeleeDamageFactor(VMM_MeleeMode.Aggressive)
+                            / MeleeModeDB.GetMeleeCooldownFactor(VMM_MeleeMode.Aggressive);
+            float flurryRawDPS = MeleeModeDB.GetMeleeHitChance(VMM_MeleeMode.Flurry)
+                              * MeleeModeDB.GetMeleeDamageFactor(VMM_MeleeMode.Flurry)
+                              / MeleeModeDB.GetMeleeCooldownFactor(VMM_MeleeMode.Flurry);
 
             // 进攻分：累加上下文加成
-            float aggScore = 1.0f
-                + 0.3f                               // 模式基础进攻优势
-                + targetMissingHP * 1.5f           // 收割冲动
-                + allyCount * 0.25f                // 有队友时更敢输出
-                - (enemyCount - 1) * 0.4f          // 多目标输出受限
-                + Mathf.Min(targetArmor, 1.5f) * 0.6f;  // 高甲目标需穿甲
+            float aggScore = (1.0f
+                + Mathf.Min(targetArmor, 1.5f) * 0.6f)  // 高甲目标需穿甲
+                * aggRawDPS;
 
-            float flurryScore = 1.0f
+            float flurryScore = (1.0f
                 + (meleeSkill / 20f) * 1.5f        // 高手技能兑现
                 + Mathf.Min(targetDodge / 0.3f, 1f) * 1.0f  // 克制高闪避
-                - Mathf.Max(enemyCount - 1, 0) * 0.4f  // 多目标连击无效
-                - targetMissingHP * 1.0f           // 残血目标浪费连击
-                - Mathf.Min(targetArmor, 1.5f) * 0.7f;  // 高甲弹刀
+                - Mathf.Min(targetArmor, 1.5f) * 0.7f)  // 高甲弹刀
+                * flurryRawDPS;
 
-            float defaultScore = 1.0f;              // 锚点
-
+            float defaultScore = 1.0f;
             // 防御分（仅闪避维度，格挡由规则触发）
-            float aggDef = 0.85f * (1f + (enemyCount - 1) * 0.3f);
-            float flurryDef = 1.0f * (1f + (enemyCount - 1) * 0.3f);
-            float defaultDef = 1.0f * (1f + (enemyCount - 1) * 0.3f);
+            float aggDef = MeleeModeDB.GetMeleeDodgeChance(VMM_MeleeMode.Aggressive)
+                * (1f + (enemyCount - 1) * 0.3f);
+            float flurryDef = MeleeModeDB.GetMeleeDodgeChance(VMM_MeleeMode.Flurry)
+                * (1f + (enemyCount - 1) * 0.3f);
+            float defaultDef = 1f * (1f + (enemyCount - 1) * 0.3f);
 
             // 反击分（parryChance × counterChance乘积）
-            float aggCtr = 0.90f * 1.50f;
-            float flurryCtr = 0.80f * 0.60f;
-            float defaultCtr = 1.0f * 1.0f;
+            float aggCtr = MeleeModeDB.GetMeleeParryChanceFactor(VMM_MeleeMode.Aggressive)
+                * MeleeModeDB.GetMeleeCounterChanceFactor(VMM_MeleeMode.Aggressive);
+            float flurryCtr = MeleeModeDB.GetMeleeParryChanceFactor(VMM_MeleeMode.Flurry)
+                * MeleeModeDB.GetMeleeCounterChanceFactor(VMM_MeleeMode.Flurry);
+            float defaultCtr = 1f * 1f;
 
             // 加总三维度
             aggScore += aggDef + aggCtr * 0.3f;
