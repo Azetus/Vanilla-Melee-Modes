@@ -6,7 +6,7 @@ using VMM_VanillaMeleeModes.Comps;
 
 namespace VMM_VanillaMeleeModes.Patches
 {
-    [HarmonyPatch(typeof(Pawn_JobTracker), "StartJob")]
+    [HarmonyPatch(typeof(Pawn_JobTracker), nameof(Pawn_JobTracker.StartJob))]
     public static class Patch_AutoMode_OnPlayerMeleeJob
     {
         // 仅玩家Pawn的AttackMelee Job：点击即触发评估

@@ -24,7 +24,7 @@ namespace VMM_VanillaMeleeModes.Patch_CombatExtended.Utilities
         {
             // 采集战场上下文
             int enemyCount = CountNearbyThreats(pawn);
-            int allyCount = CountNearbyAllies(pawn);
+            int allyCount = enemyCount >= 3 ? CountNearbyAllies(pawn) : 0;
 
             // 层级1：紧急规则（与原版完全相同）
             if (EvaluateTier1_Emergency(pawn, target, enemyCount, allyCount,
@@ -138,23 +138,25 @@ namespace VMM_VanillaMeleeModes.Patch_CombatExtended.Utilities
                 }
             }
 
-            // 各模式 raw DPS（含命中×伤害/冷却，不含AP——AP由护甲评分单独处理）
+            // 各模式 raw DPS（命中×伤害×穿甲/冷却）
             float aggRawDPS = MeleeModeDB_CE.GetMeleeHitChance_CE(VMM_MeleeMode.Aggressive)
                             * MeleeModeDB_CE.GetMeleeDamageFactor_CE(VMM_MeleeMode.Aggressive)
+                            * MeleeModeDB_CE.GetMeleeArmorPenetration_CE(VMM_MeleeMode.Aggressive)
                             / MeleeModeDB_CE.GetMeleeCooldownFactor_CE(VMM_MeleeMode.Aggressive);
             float flurryRawDPS = MeleeModeDB_CE.GetMeleeHitChance_CE(VMM_MeleeMode.Flurry)
                               * MeleeModeDB_CE.GetMeleeDamageFactor_CE(VMM_MeleeMode.Flurry)
+                              * MeleeModeDB_CE.GetMeleeArmorPenetration_CE(VMM_MeleeMode.Flurry)
                               / MeleeModeDB_CE.GetMeleeCooldownFactor_CE(VMM_MeleeMode.Flurry);
 
             // 进攻分：累加上下文加成
             float aggScore = (1.0f
-                + Mathf.Min(targetArmor, 1.5f) * 0.6f * armorWeight)  // 高甲目标需穿甲
+                + Mathf.Min(targetArmor, 1.5f) * 0.8f * armorWeight)  // 高甲目标需穿甲
                 * aggRawDPS;
 
             float flurryScore = (1.0f
                 + (meleeSkill / 20f) * 1.5f        // 高手技能兑现
                 + Mathf.Min(targetDodge / 0.3f, 1f) * 1.0f  // 克制高闪避
-                - Mathf.Min(targetArmor, 1.5f) * 0.7f * armorWeight)  // 高甲弹刀
+                - Mathf.Min(targetArmor, 1.5f) * 0.9f * armorWeight)  // 高甲弹刀
                 * flurryRawDPS;
 
             float defaultScore = 1.0f;
@@ -214,10 +216,15 @@ namespace VMM_VanillaMeleeModes.Patch_CombatExtended.Utilities
             var hostileTargets = pawn.Map.attackTargetsCache
                 .TargetsHostileToFaction(pawn.Faction);
             foreach (var target in hostileTargets)
-                if (target.Thing is Pawn other && !other.Dead && !other.Downed
-                    && other.Position.InHorDistOf(pawn.Position,
-                        THREAT_SEARCH_RADIUS))
-                    count++;
+            {
+                if (target.Thing is not Pawn other
+                    || other.health.State != PawnHealthState.Mobile
+                    || other.mindState.meleeThreat != pawn
+                    || !other.Position.InHorDistOf(pawn.Position, THREAT_SEARCH_RADIUS))
+                    continue;
+                if (++count >= EMERGENCY_THREAT_COUNT)
+                    return count;
+            }
             return count;
         }
 
