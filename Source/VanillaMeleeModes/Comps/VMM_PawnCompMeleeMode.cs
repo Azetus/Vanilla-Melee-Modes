@@ -129,7 +129,7 @@ namespace VMM_VanillaMeleeModes.Comps
             }
 
             // 手动循环按钮（Auto关闭时显示）
-            // if (!isAutoMode || !MeleeModeDB.Settings.enableAutoSelectionForPlayer)
+            if (!isAutoMode || !MeleeModeDB.Settings.enableAutoSelectionForPlayer)
             {
                 yield return new Command_Action
                 {

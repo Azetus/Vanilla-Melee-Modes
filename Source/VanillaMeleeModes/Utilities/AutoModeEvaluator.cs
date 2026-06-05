@@ -26,14 +26,14 @@ namespace VMM_VanillaMeleeModes.Utilities
         public static bool IsInMeleeCombat(Pawn pawn)
         {
             return pawn.mindState.meleeThreat != null
-                || pawn.CurJobDef == JobDefOf.AttackMelee;
+                   || pawn.CurJobDef == JobDefOf.AttackMelee;
         }
 
         // 获取当前近战目标（优先meleeThreat）
         public static Thing? GetCombatTarget(Pawn pawn)
         {
             return (Thing)pawn.mindState.meleeThreat
-                ?? pawn.CurJob?.targetA.Thing;
+                   ?? pawn.CurJob?.targetA.Thing;
         }
 
         // 冷却期内紧急Guard越级检查
@@ -78,7 +78,7 @@ namespace VMM_VanillaMeleeModes.Utilities
                 result = VMM_MeleeMode.Guard;
                 return true;
             }
-            // TODO: 判断条件可以改大一点
+
             // 被围或孤立被围
             if (enemyCount >= EMERGENCY_THREAT_COUNT || (enemyCount >= 3 && allyCount == 0))
             {
@@ -94,6 +94,7 @@ namespace VMM_VanillaMeleeModes.Utilities
                     result = VMM_MeleeMode.Aggressive;
                     return true;
                 }
+
                 float targetHp = targetPawn.health.summaryHealth.SummaryHealthPercent;
                 // 强力收尾残血目标
                 if (hp >= 0.8f && targetHp <= 0.2f)
@@ -105,7 +106,6 @@ namespace VMM_VanillaMeleeModes.Utilities
 
             return false;
         }
-
 
 
         // 层级2：三维度加权评分（Guard不参与评分，仅由规则触发）
@@ -134,38 +134,38 @@ namespace VMM_VanillaMeleeModes.Utilities
 
             // 各模式 raw DPS（命中×伤害×穿甲/冷却）
             float aggRawDPS = MeleeModeDB.GetMeleeHitChance(VMM_MeleeMode.Aggressive)
-                            * MeleeModeDB.GetMeleeDamageFactor(VMM_MeleeMode.Aggressive)
-                            * MeleeModeDB.GetMeleeArmorPenetration(VMM_MeleeMode.Aggressive)
-                            / MeleeModeDB.GetMeleeCooldownFactor(VMM_MeleeMode.Aggressive);
+                              * MeleeModeDB.GetMeleeDamageFactor(VMM_MeleeMode.Aggressive)
+                              * MeleeModeDB.GetMeleeArmorPenetration(VMM_MeleeMode.Aggressive)
+                              / MeleeModeDB.GetMeleeCooldownFactor(VMM_MeleeMode.Aggressive);
             float flurryRawDPS = MeleeModeDB.GetMeleeHitChance(VMM_MeleeMode.Flurry)
-                              * MeleeModeDB.GetMeleeDamageFactor(VMM_MeleeMode.Flurry)
-                              * MeleeModeDB.GetMeleeArmorPenetration(VMM_MeleeMode.Flurry)
-                              / MeleeModeDB.GetMeleeCooldownFactor(VMM_MeleeMode.Flurry);
+                                 * MeleeModeDB.GetMeleeDamageFactor(VMM_MeleeMode.Flurry)
+                                 * MeleeModeDB.GetMeleeArmorPenetration(VMM_MeleeMode.Flurry)
+                                 / MeleeModeDB.GetMeleeCooldownFactor(VMM_MeleeMode.Flurry);
 
             // 进攻分：累加上下文加成
             float aggScore = (1.0f
-                + Mathf.Min(targetArmor, 1.5f) * 0.8f)  // 高甲目标需穿甲
-                * aggRawDPS;
+                              + Mathf.Min(targetArmor, 1.5f) * 0.8f) // 高甲目标需穿甲
+                             * aggRawDPS;
 
             float flurryScore = (1.0f
-                + (meleeSkill / 20f) * 1.5f        // 高手技能兑现
-                + Mathf.Min(targetDodge / 0.3f, 1f) * 1.0f  // 克制高闪避
-                - Mathf.Min(targetArmor, 1.5f) * 0.9f)  // 高甲弹刀
-                * flurryRawDPS;
+                                 + (meleeSkill / 20f) * 1.5f // 高手技能兑现
+                                 + Mathf.Min(targetDodge / 0.3f, 1f) * 1.0f // 克制高闪避
+                                 - Mathf.Min(targetArmor, 1.5f) * 0.9f) // 高甲弹刀
+                                * flurryRawDPS;
 
             float defaultScore = 1.0f;
             // 防御分（仅闪避维度，格挡由规则触发）
             float aggDef = MeleeModeDB.GetMeleeDodgeChance(VMM_MeleeMode.Aggressive)
-                * (1f + (enemyCount - 1) * 0.3f);
+                           * (1f + (enemyCount - 1) * 0.3f);
             float flurryDef = MeleeModeDB.GetMeleeDodgeChance(VMM_MeleeMode.Flurry)
-                * (1f + (enemyCount - 1) * 0.3f);
+                              * (1f + (enemyCount - 1) * 0.3f);
             float defaultDef = 1f * (1f + (enemyCount - 1) * 0.3f);
 
             // 反击分（parryChance × counterChance乘积）
             float aggCtr = MeleeModeDB.GetMeleeParryChanceFactor(VMM_MeleeMode.Aggressive)
-                * MeleeModeDB.GetMeleeCounterChanceFactor(VMM_MeleeMode.Aggressive);
+                           * MeleeModeDB.GetMeleeCounterChanceFactor(VMM_MeleeMode.Aggressive);
             float flurryCtr = MeleeModeDB.GetMeleeParryChanceFactor(VMM_MeleeMode.Flurry)
-                * MeleeModeDB.GetMeleeCounterChanceFactor(VMM_MeleeMode.Flurry);
+                              * MeleeModeDB.GetMeleeCounterChanceFactor(VMM_MeleeMode.Flurry);
             float defaultCtr = 1f * 1f;
 
             // 加总三维度
@@ -211,6 +211,7 @@ namespace VMM_VanillaMeleeModes.Utilities
                 if (++count >= EMERGENCY_THREAT_COUNT)
                     return count;
             }
+
             return count;
         }
 
