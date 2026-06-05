@@ -92,49 +92,48 @@ namespace VMM_VanillaMeleeModes.Patch_CombatExtended.Utilities
             {
                 targetDodge = tp.GetStatValue(StatDefOf.MeleeDodgeChance);
 
+                // 反推两种基础穿甲
+                var verb = pawn.meleeVerbs.TryGetMeleeVerb(target);
+                var verbCE = verb as Verb_MeleeAttackCE;
+                float rawSharpAP = verbCE?.ArmorPenetrationSharp ?? 0f;
+                float rawBluntAP = verbCE?.ArmorPenetrationBlunt ?? 0f;
+                float currentFactor = MeleeModeDB_CE.GetMeleeArmorPenetration_CE(
+                    currentMode);
+                float baseSharpAP = currentFactor > 0.01f
+                    ? rawSharpAP / currentFactor : rawSharpAP;
+                float baseBluntAP = currentFactor > 0.01f
+                    ? rawBluntAP / currentFactor : rawBluntAP;
+
+                // 武器主导：取 AP 更高的维度，仅读该维度的护甲
+                bool useSharp = baseSharpAP >= baseBluntAP;
+                StatDef armorStat = useSharp
+                    ? StatDefOf.ArmorRating_Sharp
+                    : StatDefOf.ArmorRating_Blunt;
+                float baseAP = useSharp ? baseSharpAP : baseBluntAP;
+
+                // 护甲：自然护甲 + 逐服饰取最大值
+                float rawArmor = tp.GetStatValue(armorStat);
                 if (tp.apparel != null)
-                {
-                    // 反推两种基础穿甲
-                    var verb = pawn.meleeVerbs.TryGetMeleeVerb(target);
-                    var verbCE = verb as Verb_MeleeAttackCE;
-                    float rawSharpAP = verbCE?.ArmorPenetrationSharp ?? 0f;
-                    float rawBluntAP = verbCE?.ArmorPenetrationBlunt ?? 0f;
-                    float currentFactor = MeleeModeDB_CE.GetMeleeArmorPenetration_CE(
-                        currentMode);
-                    float baseSharpAP = currentFactor > 0.01f
-                        ? rawSharpAP / currentFactor : rawSharpAP;
-                    float baseBluntAP = currentFactor > 0.01f
-                        ? rawBluntAP / currentFactor : rawBluntAP;
-
-                    // 武器主导：取 AP 更高的维度，仅读该维度的护甲
-                    bool useSharp = baseSharpAP >= baseBluntAP;
-                    StatDef armorStat = useSharp
-                        ? StatDefOf.ArmorRating_Sharp
-                        : StatDefOf.ArmorRating_Blunt;
-                    float baseAP = useSharp ? baseSharpAP : baseBluntAP;
-
-                    float rawArmor = 0f;
                     foreach (var a in tp.apparel.WornApparel)
                         rawArmor = Mathf.Max(rawArmor, a.GetStatValue(armorStat));
-                    // 裸体目标 targetArmor 保持 0 → 护甲加减分消失，正确行为
-                    targetArmor = rawArmor / ARMOR_NORMALIZATION_FACTOR;
+                targetArmor = rawArmor / ARMOR_NORMALIZATION_FACTOR;
 
-                    if (rawArmor > 0.01f)
-                    {
-                        float aggAP = baseAP
-                            * MeleeModeDB_CE.GetMeleeArmorPenetration_CE(
-                                VMM_MeleeMode.Aggressive);
-                        float flurryAP = baseAP
-                            * MeleeModeDB_CE.GetMeleeArmorPenetration_CE(
-                                VMM_MeleeMode.Flurry);
+                // CE 穿甲门槛判定
+                if (rawArmor > 0.01f)
+                {
+                    float aggAP = baseAP
+                        * MeleeModeDB_CE.GetMeleeArmorPenetration_CE(
+                            VMM_MeleeMode.Aggressive);
+                    float flurryAP = baseAP
+                        * MeleeModeDB_CE.GetMeleeArmorPenetration_CE(
+                            VMM_MeleeMode.Flurry);
 
-                        if (aggAP >= rawArmor && flurryAP < rawArmor)
-                            armorWeight = 3.0f;
-                        else if (flurryAP >= rawArmor)
-                            armorWeight = 0.5f;
-                        else
-                            armorWeight = 1.0f;
-                    }
+                    if (aggAP >= rawArmor && flurryAP < rawArmor)
+                        armorWeight = 3.0f;
+                    else if (flurryAP >= rawArmor)
+                        armorWeight = 0.5f;
+                    else
+                        armorWeight = 1.0f;
                 }
             }
 

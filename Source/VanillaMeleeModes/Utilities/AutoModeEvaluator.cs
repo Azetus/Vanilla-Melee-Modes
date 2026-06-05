@@ -121,7 +121,10 @@ namespace VMM_VanillaMeleeModes.Utilities
             {
                 targetDodge = tp.GetStatValue(StatDefOf.MeleeDodgeChance);
 
-                // 护甲：逐服饰取最大值（原版护甲按部件存储，不在 pawn 级聚合）
+                // 护甲：自然护甲 + 逐服饰取最大值
+                targetArmor = Mathf.Max(
+                    tp.GetStatValue(StatDefOf.ArmorRating_Sharp),
+                    tp.GetStatValue(StatDefOf.ArmorRating_Blunt));
                 if (tp.apparel != null)
                     foreach (var a in tp.apparel.WornApparel)
                         targetArmor = Mathf.Max(targetArmor,
