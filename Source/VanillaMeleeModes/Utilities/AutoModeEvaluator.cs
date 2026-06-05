@@ -25,21 +25,21 @@ namespace VMM_VanillaMeleeModes.Utilities
         // 是否处于近战战斗
         public static bool IsInMeleeCombat(Pawn pawn)
         {
-            return pawn.mindState.meleeThreat != null
+            return pawn.mindState?.meleeThreat != null
                    || pawn.CurJobDef == JobDefOf.AttackMelee;
         }
 
         // 获取当前近战目标（优先meleeThreat）
         public static Thing? GetCombatTarget(Pawn pawn)
         {
-            return (Thing)pawn.mindState.meleeThreat
+            return (Thing?)pawn.mindState?.meleeThreat
                    ?? pawn.CurJob?.targetA.Thing;
         }
 
         // 冷却期内紧急Guard越级检查
         public static bool ShouldTriggerEmergencyGuard(Pawn pawn)
         {
-            if (pawn.health.summaryHealth.SummaryHealthPercent <= EMERGENCY_HP_THRESHOLD)
+            if (pawn.health?.summaryHealth.SummaryHealthPercent <= EMERGENCY_HP_THRESHOLD)
                 return true;
             if (CountNearbyThreats(pawn) >= EMERGENCY_THREAT_COUNT)
                 return true;
@@ -70,7 +70,7 @@ namespace VMM_VanillaMeleeModes.Utilities
             int enemyCount, int allyCount, out VMM_MeleeMode result)
         {
             result = VMM_MeleeMode.Default;
-            float hp = pawn.health.summaryHealth.SummaryHealthPercent;
+            float hp = pawn.health?.summaryHealth.SummaryHealthPercent ?? 1f;
 
             // 濒死求生
             if (hp <= EMERGENCY_HP_THRESHOLD)
@@ -95,7 +95,7 @@ namespace VMM_VanillaMeleeModes.Utilities
                     return true;
                 }
 
-                float targetHp = targetPawn.health.summaryHealth.SummaryHealthPercent;
+                float targetHp = targetPawn.health?.summaryHealth.SummaryHealthPercent ?? 1f;
                 // 强力收尾残血目标
                 if (hp >= 0.8f && targetHp <= 0.2f)
                 {
@@ -113,7 +113,7 @@ namespace VMM_VanillaMeleeModes.Utilities
             int enemyCount, int allyCount, VMM_MeleeMode currentMode)
         {
             // 采集评分输入因子
-            float meleeSkill = pawn.skills.GetSkill(SkillDefOf.Melee)?.Level ?? 0f;
+            float meleeSkill = pawn.skills?.GetSkill(SkillDefOf.Melee)?.Level ?? 0f;
 
             float targetDodge = 0f;
             float targetArmor = 0f;
@@ -205,7 +205,7 @@ namespace VMM_VanillaMeleeModes.Utilities
             {
                 if (target.Thing is not Pawn other
                     || other.health.State != PawnHealthState.Mobile
-                    || other.mindState.meleeThreat != pawn
+                    || other.mindState?.meleeThreat != pawn
                     || !other.Position.InHorDistOf(pawn.Position, THREAT_SEARCH_RADIUS))
                     continue;
                 if (++count >= EMERGENCY_THREAT_COUNT)
@@ -218,7 +218,7 @@ namespace VMM_VanillaMeleeModes.Utilities
         // 采集半径内友方Pawn数量（排除自身及死亡/倒地）
         private static int CountNearbyAllies(Pawn pawn)
         {
-            if (pawn.Map == null) return 0;
+            if (pawn.Map == null || pawn.Faction == null) return 0;
             int count = 0;
             foreach (Pawn other in pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction))
                 if (other != pawn && !other.Dead && !other.Downed

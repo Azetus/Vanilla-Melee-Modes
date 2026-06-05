@@ -83,7 +83,7 @@ namespace VMM_VanillaMeleeModes.Patch_CombatExtended.Utilities
             VMM_MeleeMode currentMode)
         {
             // 采集评分输入因子
-            float meleeSkill = pawn.skills.GetSkill(SkillDefOf.Melee)?.Level ?? 0f;
+            float meleeSkill = pawn.skills?.GetSkill(SkillDefOf.Melee)?.Level ?? 0f;
 
             float targetDodge = 0f;
             float targetArmor = 0f;
@@ -93,7 +93,7 @@ namespace VMM_VanillaMeleeModes.Patch_CombatExtended.Utilities
                 targetDodge = tp.GetStatValue(StatDefOf.MeleeDodgeChance);
 
                 // 反推两种基础穿甲
-                var verb = pawn.meleeVerbs.TryGetMeleeVerb(target);
+                var verb = pawn.meleeVerbs?.TryGetMeleeVerb(target);
                 var verbCE = verb as Verb_MeleeAttackCE;
                 float rawSharpAP = verbCE?.ArmorPenetrationSharp ?? 0f;
                 float rawBluntAP = verbCE?.ArmorPenetrationBlunt ?? 0f;
@@ -218,7 +218,7 @@ namespace VMM_VanillaMeleeModes.Patch_CombatExtended.Utilities
             {
                 if (target.Thing is not Pawn other
                     || other.health.State != PawnHealthState.Mobile
-                    || other.mindState.meleeThreat != pawn
+                    || other.mindState?.meleeThreat != pawn
                     || !other.Position.InHorDistOf(pawn.Position, THREAT_SEARCH_RADIUS))
                     continue;
                 if (++count >= EMERGENCY_THREAT_COUNT)
@@ -230,7 +230,7 @@ namespace VMM_VanillaMeleeModes.Patch_CombatExtended.Utilities
         // 采集半径内友方Pawn数量（排除自身及死亡/倒地）
         private static int CountNearbyAllies(Pawn pawn)
         {
-            if (pawn.Map == null) return 0;
+            if (pawn.Map == null || pawn.Faction == null) return 0;
             int count = 0;
             foreach (Pawn other in pawn.Map.mapPawns
                 .SpawnedPawnsInFaction(pawn.Faction))
