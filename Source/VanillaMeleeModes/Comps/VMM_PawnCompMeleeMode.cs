@@ -90,7 +90,9 @@ namespace VMM_VanillaMeleeModes.Comps
         // 判断当前Pawn是否应启用自动评估
         private bool IsAutoModeEffective(Pawn pawn)
         {
-            if (pawn.Faction == Faction.OfPlayer)
+            if (pawn.IsColonistPlayerControlled
+                || pawn.IsColonyMechPlayerControlled
+                || pawn.IsColonySubhumanPlayerControlled)
                 return isAutoMode && MeleeModeDB.Settings.enableAutoSelectionForPlayer;
 
             return MeleeModeDB.Settings.enableAutoSelectionForPlayer

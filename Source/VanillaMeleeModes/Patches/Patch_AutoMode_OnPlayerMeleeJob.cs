@@ -16,7 +16,9 @@ namespace VMM_VanillaMeleeModes.Patches
         {
             if (newJob.def != JobDefOf.AttackMelee)
                 return;
-            if (___pawn.Faction != Faction.OfPlayer)
+            if (!___pawn.IsColonistPlayerControlled
+                && !___pawn.IsColonyMechPlayerControlled
+                && !___pawn.IsColonySubhumanPlayerControlled)
                 return;
 
             var comp = ___pawn.TryGetComp<VMM_PawnCompMeleeMode>();
