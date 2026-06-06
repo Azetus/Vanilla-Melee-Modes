@@ -32,10 +32,13 @@ namespace VMM_VanillaMeleeModes.ModSettingUI
                 "VMM_EnableAutoSelectionForPlayer_Label".Translate(),
                 ref settings.enableAutoSelectionForPlayer
             );
-            ls.CheckboxLabeled(
-                "VMM_EnableAutoSelectionForNPC_Label".Translate(),
-                ref settings.enableAutoSelectionForNPC
-            );
+            if (settings.enableAutoSelectionForPlayer)
+            {
+                ls.CheckboxLabeled(
+                    "VMM_EnableAutoSelectionForNPC_Label".Translate(),
+                    ref settings.enableAutoSelectionForNPC
+                );
+            }
             if (!VanillaMeleeModes.isCEActive)
             {
                 // Vanilla Parry & Counterattack
