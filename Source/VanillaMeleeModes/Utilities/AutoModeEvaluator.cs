@@ -62,7 +62,7 @@ namespace VMM_VanillaMeleeModes.Utilities
                 return result;
 
             // 层级2：加权评分
-            return EvaluateTier3_Scoring(pawn, target, enemyCount, allyCount, currentMode);
+            return EvaluateTier3_Scoring(pawn, target, enemyCount, currentMode);
         }
 
         // 层级1：紧急规则（硬规则 -> Guard）
@@ -110,7 +110,7 @@ namespace VMM_VanillaMeleeModes.Utilities
 
         // 层级2：三维度加权评分（Guard不参与评分，仅由规则触发）
         private static VMM_MeleeMode EvaluateTier3_Scoring(Pawn pawn, Thing? target,
-            int enemyCount, int allyCount, VMM_MeleeMode currentMode)
+            int enemyCount, VMM_MeleeMode currentMode)
         {
             // 采集评分输入因子
             float meleeSkill = pawn.skills?.GetSkill(SkillDefOf.Melee)?.Level ?? 0f;
