@@ -21,8 +21,11 @@
 	<VMM_EnableVanillaParryAndCounterattackForNpc_Label>Enable Parrying and Counterattacking for NPCs</VMM_EnableVanillaParryAndCounterattackForNpc_Label>
 
 	<VMM_EnableAutoSelectionForPlayer_Label>Enable auto-selection melee mode for player-controlled pawns</VMM_EnableAutoSelectionForPlayer_Label>
+	<VMM_EnableAutoSelectionForPlayer_Desc>When enabled, the auto melee mode toggle button will be displayed. If you don't need this feature and prefer a less cluttered gizmo bar, you can disable it here.</VMM_EnableAutoSelectionForPlayer_Desc>
 	<VMM_EnableAutoSelectionForNPC_Label>Enable auto-selection melee mode for NPCs</VMM_EnableAutoSelectionForNPC_Label>
+	<VMM_EnableAutoSelectionForNPC_Desc>When enabled, NPCs will automatically switch melee modes based on combat conditions.</VMM_EnableAutoSelectionForNPC_Desc>
 
 	<VMM_AlwaysDisplayGizmo_Label>Show gizmo buttons when undrafted</VMM_AlwaysDisplayGizmo_Label>
 	<VMM_AutoModeDefaultOn_Label>Enable auto-selection by default for new colonists</VMM_AutoModeDefaultOn_Label>
+	<VMM_AutoModeDefaultOn_Desc>When enabled, the auto melee mode toggle will be on by default for new colonists.</VMM_AutoModeDefaultOn_Desc>
 </LanguageData>

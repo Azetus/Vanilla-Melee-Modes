@@ -21,8 +21,11 @@
 	<VMM_EnableVanillaParryAndCounterattackForNpc_Label>为NPC启用格挡与反击</VMM_EnableVanillaParryAndCounterattackForNpc_Label>
 	
 	<VMM_EnableAutoSelectionForPlayer_Label>为玩家Pawn启用自动切换近战模式</VMM_EnableAutoSelectionForPlayer_Label>
+	<VMM_EnableAutoSelectionForPlayer_Desc>启用后将会显示自动切换近战模式按钮，如果不需要这个功能，并且不希望按钮栏太过拥挤，可以关闭这个功能</VMM_EnableAutoSelectionForPlayer_Desc>
 	<VMM_EnableAutoSelectionForNPC_Label>为NPC启用自动切换近战模式</VMM_EnableAutoSelectionForNPC_Label>
+	<VMM_EnableAutoSelectionForNPC_Desc>启用后NPC将会根据战斗情况自动切换近战模式</VMM_EnableAutoSelectionForNPC_Desc>
 
 	<VMM_AlwaysDisplayGizmo_Label>非征召状态下显示按钮</VMM_AlwaysDisplayGizmo_Label>
 	<VMM_AutoModeDefaultOn_Label>为新殖民者默认开启自动切换模式</VMM_AutoModeDefaultOn_Label>
+	<VMM_AutoModeDefaultOn_Desc>启用后，新殖民者将默认开启自动近战模式切换。</VMM_AutoModeDefaultOn_Desc>
 </LanguageData>

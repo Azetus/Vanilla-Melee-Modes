@@ -30,17 +30,20 @@ namespace VMM_VanillaMeleeModes.ModSettingUI
             );
             ls.CheckboxLabeled(
                 "VMM_EnableAutoSelectionForPlayer_Label".Translate(),
-                ref settings.enableAutoSelectionForPlayer
+                ref settings.enableAutoSelectionForPlayer,
+                "VMM_EnableAutoSelectionForPlayer_Desc".Translate()
             );
             if (settings.enableAutoSelectionForPlayer)
             {
                 ls.CheckboxLabeled(
                     "VMM_AutoModeDefaultOn_Label".Translate(),
-                    ref settings.autoModeDefaultOn
+                    ref settings.autoModeDefaultOn,
+                    "VMM_AutoModeDefaultOn_Desc".Translate()
                 );
                 ls.CheckboxLabeled(
                     "VMM_EnableAutoSelectionForNPC_Label".Translate(),
-                    ref settings.enableAutoSelectionForNPC
+                    ref settings.enableAutoSelectionForNPC,
+                    "VMM_EnableAutoSelectionForNPC_Desc".Translate()
                 );
             }
             if (!VanillaMeleeModes.isCEActive)
