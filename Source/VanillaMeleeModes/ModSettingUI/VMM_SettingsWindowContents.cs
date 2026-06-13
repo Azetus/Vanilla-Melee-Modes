@@ -35,6 +35,10 @@ namespace VMM_VanillaMeleeModes.ModSettingUI
             if (settings.enableAutoSelectionForPlayer)
             {
                 ls.CheckboxLabeled(
+                    "VMM_AutoModeDefaultOn_Label".Translate(),
+                    ref settings.autoModeDefaultOn
+                );
+                ls.CheckboxLabeled(
                     "VMM_EnableAutoSelectionForNPC_Label".Translate(),
                     ref settings.enableAutoSelectionForNPC
                 );

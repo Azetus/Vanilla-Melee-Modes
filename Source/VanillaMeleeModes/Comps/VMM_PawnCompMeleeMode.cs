@@ -12,7 +12,7 @@ namespace VMM_VanillaMeleeModes.Comps
         private VMM_MeleeMode mode = VMM_MeleeMode.Default;
 
         // 自动模式状态
-        private bool isAutoMode = false;
+        private bool isAutoMode = MeleeModeDB.Settings?.autoModeDefaultOn ?? false;
 
         // 上一次玩家手动触发自动切换评估的时间戳（用于冷却计算）
         private int lastPlayerOverrideTick = -9999;

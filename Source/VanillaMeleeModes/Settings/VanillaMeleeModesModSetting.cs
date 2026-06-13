@@ -94,6 +94,7 @@ namespace VMM_VanillaMeleeModes.Settings
         // ------ 自动选择模式 (Auto Selection) ------
         public bool enableAutoSelectionForPlayer = true;
         public bool enableAutoSelectionForNPC = false;
+        public bool autoModeDefaultOn = false;
 
         #endregion
 
@@ -185,6 +186,7 @@ namespace VMM_VanillaMeleeModes.Settings
             // ------ 自动选择模式 (Auto Selection) ------
             Scribe_Values.Look(ref enableAutoSelectionForPlayer, nameof(enableAutoSelectionForPlayer), true);
             Scribe_Values.Look(ref enableAutoSelectionForNPC, nameof(enableAutoSelectionForNPC), false);
+            Scribe_Values.Look(ref autoModeDefaultOn, nameof(autoModeDefaultOn), false);
 
             base.ExposeData();
         }
@@ -194,6 +196,7 @@ namespace VMM_VanillaMeleeModes.Settings
             alwaysDisplayGizmo = false;
             enableAutoSelectionForPlayer = true;
             enableAutoSelectionForNPC = false;
+            autoModeDefaultOn = false;
         }
 
         public void ResetSetting()
