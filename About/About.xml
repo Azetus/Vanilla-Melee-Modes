@@ -21,4 +21,5 @@
 	</loadAfter>
 	<description>Vanilla Melee Modes - Selectable melee modes with parry and counterattack for vanilla melee combat</description>
 	<modIconPath IgnoreIfNoMatchingField="True">VMM_Mod_Icon</modIconPath>
+	<modVersion IgnoreIfNoMatchingField="True">1.2.3</modVersion>
 </ModMetaData>

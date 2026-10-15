@@ -6,6 +6,7 @@
         <AssemblyName>zz.VMM.Patch_CombatExtended</AssemblyName>
         <!--        <ImplicitUsings>enable</ImplicitUsings>-->
         <!--        <Nullable>enable</Nullable>-->
+        <Version>1.2.3</Version>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
@@ -26,4 +27,10 @@
             <ExcludeAssets>runtime</ExcludeAssets>
         </Reference>
     </ItemGroup>
+    <Target Name="BundleMod" AfterTargets="Build" Condition="'$(Configuration)' == 'Release' and '$(DesignTimeBuild)' != 'true'">
+        <PropertyGroup>
+            <VMMBundleScript>$([MSBuild]::GetDirectoryNameOfFileAbove('$(MSBuildProjectDirectory)', 'LoadFolders.xml'))\Scripts\Bundle-Mod.ps1</VMMBundleScript>
+        </PropertyGroup>
+        <Exec Command="powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File &quot;$(VMMBundleScript)&quot;" />
+    </Target>
 </Project>
