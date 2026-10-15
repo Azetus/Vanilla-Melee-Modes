@@ -1,11 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
-        <TargetFramework>net472</TargetFramework>
         <RootNamespace>VMM_VanillaMeleeModes.Patch_CombatExtended</RootNamespace>
         <AssemblyName>zz.VMM.Patch_CombatExtended</AssemblyName>
-        <!--        <ImplicitUsings>enable</ImplicitUsings>-->
-        <!--        <Nullable>enable</Nullable>-->
         <Version>1.2.3</Version>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
@@ -19,7 +15,6 @@
             <CopyLocal>False</CopyLocal>
             <ExcludeAssets>all</ExcludeAssets>
         </ProjectReference>
-        
         <Reference Include="CombatExtended">
             <HintPath>ref\CombatExtended.dll</HintPath>
             <Private>False</Private>

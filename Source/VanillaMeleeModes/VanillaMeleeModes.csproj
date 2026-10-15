@@ -1,7 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
-		<TargetFramework>net472</TargetFramework>
 		<RootNamespace>VMM_VanillaMeleeModes</RootNamespace>
 		<Version>1.2.3</Version>
 	</PropertyGroup>
@@ -10,13 +8,4 @@
 		<OutputPath>..\..\$(RimworldVersion)\Assemblies\</OutputPath>
 		<DebugType>none</DebugType>
 	</PropertyGroup>
-<!--	<ItemGroup>-->
-<!--		<PackageReference Include="Krafs.Publicizer" Version="2.3.0">-->
-<!--			<PrivateAssets>all</PrivateAssets>-->
-<!--			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>-->
-<!--		</PackageReference>-->
-<!--	</ItemGroup>-->
-<!--	<ItemGroup>-->
-<!--		<Publicize Include="Assembly-CSharp" />-->
-<!--	</ItemGroup>-->
 </Project>
