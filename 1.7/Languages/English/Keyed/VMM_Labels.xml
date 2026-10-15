@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<VMM_ModTitle>Vanilla Melee Modes</VMM_ModTitle>
+	<VMM_DefaultMode>Default</VMM_DefaultMode>
+	<VMM_AggressiveMode>Aggressive</VMM_AggressiveMode>
+	<VMM_FlurryMode>Flurry</VMM_FlurryMode>
+	<VMM_GuardMode>Guard</VMM_GuardMode>
+	<VMM_SwitchGizmoDesc>Switch Melee Mode</VMM_SwitchGizmoDesc>
+
+	<VMM_MoteText_Parry>Parry!</VMM_MoteText_Parry>
+	<VMM_MoteText_Counter>Counter!</VMM_MoteText_Counter>
+	<VMM_AutoMode>Auto Selection</VMM_AutoMode>
+	<VMM_AutoMode_Desc>Toggle automatic melee mode selection.
+When enabled, the pawn will automatically choose the best melee mode based on combat context.</VMM_AutoMode_Desc>
+</LanguageData>

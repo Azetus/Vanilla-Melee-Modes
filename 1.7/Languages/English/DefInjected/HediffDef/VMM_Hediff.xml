@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<VMM_CounterAttackCooldown.label>counter-attack cooldown</VMM_CounterAttackCooldown.label>
+	<VMM_CounterAttackCooldown.description>This is a hidden marker used during the parry/counter-attack cooldown. It prevents infinite recursion in the counter-attack logic. Please ignore it.</VMM_CounterAttackCooldown.description>
+</LanguageData>

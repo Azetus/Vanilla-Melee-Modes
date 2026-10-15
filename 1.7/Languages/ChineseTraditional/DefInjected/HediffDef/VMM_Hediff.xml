@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<VMM_CounterAttackCooldown.label>格擋反擊冷卻中</VMM_CounterAttackCooldown.label>
+	<VMM_CounterAttackCooldown.description>格擋反擊冷卻中，這是壹個隱藏標記，用於防止反擊邏輯中出現無限遞歸，請無視它。</VMM_CounterAttackCooldown.description>
+</LanguageData>

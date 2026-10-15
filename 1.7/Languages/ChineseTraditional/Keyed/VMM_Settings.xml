@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<VMM_ResetButton_Label>重置設置</VMM_ResetButton_Label>
+
+	<VMM_MeleeHitChance_Label>近戰命中率</VMM_MeleeHitChance_Label>
+	<VMM_MeleeDodgeChance_Label>近戰閃避率</VMM_MeleeDodgeChance_Label>
+	<VMM_MeleeDamageFactor_Label>近戰傷害倍率</VMM_MeleeDamageFactor_Label>
+	<VMM_MeleeCooldownFactor_Label>近戰冷卻倍率</VMM_MeleeCooldownFactor_Label>
+	<VMM_ArmorPenetration_Label>近戰護甲穿透倍率</VMM_ArmorPenetration_Label>
+
+	<VMM_MeleeParryAngle_Label>有效格擋角度</VMM_MeleeParryAngle_Label>
+	<VMM_MeleeParryChance_Label>近戰格擋倍率</VMM_MeleeParryChance_Label>
+	<VMM_MeleeParryDamageReduction_Label>格擋減傷倍率</VMM_MeleeParryDamageReduction_Label>
+	<VMM_MeleeCounterChance_Label>格擋反擊倍率</VMM_MeleeCounterChance_Label>
+
+	<VMM_CE_IsActive_Label>檢測到Combat Extended已加載，切換為CE兼容模式</VMM_CE_IsActive_Label>
+	<VMM_CE_MeleeCritChance_Label>近戰暴擊率</VMM_CE_MeleeCritChance_Label>
+
+	<VMM_EnableVanillaParry_Label>啟用格擋機制</VMM_EnableVanillaParry_Label>
+	<VMM_EnableVanillaCounterattack_Label>啟用反擊機制</VMM_EnableVanillaCounterattack_Label>
+	<VMM_EnableVanillaParryAndCounterattackForNpc_Label>為NPC啟用格擋與反擊</VMM_EnableVanillaParryAndCounterattackForNpc_Label>
+
+	<VMM_EnableAutoSelectionForPlayer_Label>為玩家Pawn啟用自動切換近戰模式</VMM_EnableAutoSelectionForPlayer_Label>
+	<VMM_EnableAutoSelectionForPlayer_Desc>啟用後將會顯示自動切換近戰模式按鈕，如果不需要這個功能，並且不希望按鈕欄太過擁擠，可以關閉這個功能</VMM_EnableAutoSelectionForPlayer_Desc>
+	<VMM_EnableAutoSelectionForNPC_Label>為NPC啟用自動切換近戰模式</VMM_EnableAutoSelectionForNPC_Label>
+	<VMM_EnableAutoSelectionForNPC_Desc>啟用後NPC將會根據戰鬥情況自動切換近戰模式</VMM_EnableAutoSelectionForNPC_Desc>
+
+	<VMM_AlwaysDisplayGizmo_Label>非征召狀態下顯示按鈕</VMM_AlwaysDisplayGizmo_Label>
+	<VMM_AutoModeDefaultOn_Label>為新殖民者預設開啟自動切換模式</VMM_AutoModeDefaultOn_Label>
+	<VMM_AutoModeDefaultOn_Desc>啟用後，新殖民者將預設開啟自動近戰模式切換。</VMM_AutoModeDefaultOn_Desc>
+</LanguageData>

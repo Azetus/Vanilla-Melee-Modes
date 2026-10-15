@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<RulePackDef>
+		<defName>VMM_Melee_Parried</defName>
+		<rulePack>
+			<rulesStrings>
+				<li>r_logentry(p=1.0)->[SUBJECT_definite] parried the attack from [INITIATOR_definite].</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+
+	<RulePackDef>
+		<defName>VMM_Melee_CounterAttack</defName>
+		<rulePack>
+			<rulesStrings>
+				<li>r_logentry(p=1.0)->[SUBJECT_definite] attempted to counter-attack [INITIATOR_definite] after parrying!</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+
+</Defs>
