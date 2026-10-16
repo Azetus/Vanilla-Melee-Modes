@@ -23,7 +23,7 @@ namespace VMM_VanillaMeleeModes.Stat
         
         protected virtual void ApplyValue(ref float val, float factor)
         {
-            val *= factor;
+            val = val < 0f && factor > 0f ? val / factor : val * factor;
         }
 
         public override string? ExplanationPart(StatRequest req)
