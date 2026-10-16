@@ -31,6 +31,9 @@ namespace VMM_VanillaMeleeModes.Patch_CombatExtended.Stat
                 stat.parts = new List<StatPart>();
             if (!stat.parts.Any(p => p is T))
                 stat.parts.Add(part);
+
+            stat.immutable = stat.IsImmutable();
+            stat.Worker.SetCacheability(stat.immutable);
         }
     }
 }
