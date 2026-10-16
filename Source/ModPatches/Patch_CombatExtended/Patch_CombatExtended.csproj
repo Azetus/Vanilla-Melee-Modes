@@ -2,7 +2,6 @@
     <PropertyGroup>
         <RootNamespace>VMM_VanillaMeleeModes.Patch_CombatExtended</RootNamespace>
         <AssemblyName>zz.VMM.Patch_CombatExtended</AssemblyName>
-        <Version>1.2.3</Version>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
